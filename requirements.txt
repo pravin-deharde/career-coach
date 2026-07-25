@@ -1,5 +1,10 @@
 Flask
 Flask-SQLAlchemy
+Flask-Login
+Flask-Bcrypt
+Flask-WTF
+Flask-Migrate
 gunicorn
 psycopg2-binary
 python-dotenv
+reportlab
