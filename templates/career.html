@@ -1,0 +1,76 @@
+{% extends "layout.html" %}
+
+{% block title %}Career Guidance{% endblock %}
+
+{% block content %}
+
+<div class="container mt-5">
+
+    <h2 class="text-center mb-4">
+        Career Guidance
+    </h2>
+
+    <div class="row">
+
+        {% for career in careers %}
+
+        <div class="col-md-6 col-lg-4 mb-4">
+
+            <div class="card shadow h-100">
+
+                <div class="card-body">
+
+                    <h4 class="text-primary">
+                        {{ career.name }}
+                    </h4>
+
+                    <hr>
+
+                    <h6>Required Skills</h6>
+
+                    <p>
+
+                        {{ career.skills }}
+
+                    </p>
+
+                    <h6>Average Salary</h6>
+
+                    <p class="text-success fw-bold">
+
+                        {{ career.salary }}
+
+                    </p>
+
+                    <h6>Description</h6>
+
+                    <p>
+
+                        Build your career as a {{ career.name }} by learning the required technologies and gaining practical project experience.
+
+                    </p>
+
+                </div>
+
+                <div class="card-footer bg-white">
+
+                    <a href="/roadmap"
+                       class="btn btn-primary w-100">
+
+                        View Roadmap
+
+                    </a>
+
+                </div>
+
+            </div>
+
+        </div>
+
+        {% endfor %}
+
+    </div>
+
+</div>
+
+{% endblock %}

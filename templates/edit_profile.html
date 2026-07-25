@@ -1,0 +1,91 @@
+{% extends "layout.html" %}
+
+{% block title %}Edit Profile{% endblock %}
+
+{% block content %}
+
+<div class="container mt-5">
+
+<div class="row justify-content-center">
+
+<div class="col-md-7">
+
+<div class="card shadow">
+
+<div class="card-header bg-warning">
+
+<h3>Edit Profile</h3>
+
+</div>
+
+<div class="card-body">
+
+<form method="POST" enctype="multipart/form-data">
+
+<div class="mb-3">
+
+<label>Full Name</label>
+
+<input
+type="text"
+class="form-control"
+name="full_name"
+value="{{ user.full_name }}"
+required>
+
+</div>
+
+<div class="mb-3">
+
+<label>Email</label>
+<div class="mb-3">
+
+<label>
+
+Profile Photo
+
+</label>
+
+<input
+type="file"
+name="photo"
+class="form-control">
+
+</div>
+<input
+type="email"
+class="form-control"
+name="email"
+value="{{ user.email }}"
+required>
+
+</div>
+
+<button
+class="btn btn-success">
+
+Update Profile
+
+</button>
+
+<a
+href="/profile"
+class="btn btn-secondary">
+
+Cancel
+
+</a>
+
+</form>
+
+</div>
+
+</div>
+
+</div>
+
+</div>
+
+</div>
+
+{% endblock %}

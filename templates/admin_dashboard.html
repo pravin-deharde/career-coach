@@ -1,0 +1,140 @@
+{% extends "layout.html" %}
+
+{% block title %}Admin Dashboard{% endblock %}
+
+{% block content %}
+
+<div class="container mt-5">
+
+<h2 class="mb-4 text-primary">
+
+Admin Dashboard
+
+</h2>
+
+<div class="row mb-4">
+
+<div class="col-md-4">
+
+<div class="card text-center shadow">
+
+<div class="card-body">
+
+<h3>{{ total_users }}</h3>
+
+<p>Total Users</p>
+
+</div>
+
+</div>
+
+</div>
+
+<div class="col-md-4">
+
+<div class="card text-center shadow">
+
+<div class="card-body">
+
+<h3>{{ total_jobs }}</h3>
+
+<p>Total Jobs</p>
+
+</div>
+
+</div>
+
+</div>
+
+<div class="col-md-4">
+
+<div class="card text-center shadow">
+
+<div class="card-body">
+
+<h3>{{ total_resumes }}</h3>
+
+<p>Total Resumes</p>
+
+</div>
+
+</div>
+
+</div>
+
+</div>
+
+<h3 class="mb-3">
+
+Registered Users
+
+</h3>
+
+<table class="table table-bordered">
+
+<thead class="table-dark">
+
+<tr>
+
+<th>ID</th>
+
+<th>Name</th>
+
+<th>Email</th>
+
+<th>Role</th>
+
+<th>Action</th>
+
+</tr>
+
+</thead>
+
+<tbody>
+
+{% for user in users %}
+
+<tr>
+
+<td>{{ user.id }}</td>
+
+<td>{{ user.full_name }}</td>
+
+<td>{{ user.email }}</td>
+
+<td>{{ user.role }}</td>
+
+<td>
+
+{% if user.role != "admin" %}
+
+<a href="/admin/delete-user/{{ user.id }}"
+class="btn btn-danger btn-sm">
+
+Delete
+
+</a>
+
+{% else %}
+
+<span class="badge bg-success">
+
+Admin
+
+</span>
+
+{% endif %}
+
+</td>
+
+</tr>
+
+{% endfor %}
+
+</tbody>
+
+</table>
+
+</div>
+
+{% endblock %}

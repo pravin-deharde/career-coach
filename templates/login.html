@@ -1,0 +1,88 @@
+{% extends "layout.html" %}
+
+{% block title %}Login{% endblock %}
+
+{% block content %}
+
+<div class="container">
+
+    <div class="row justify-content-center">
+
+        <div class="col-md-6">
+
+            <div class="card shadow-lg mt-5">
+
+                <div class="card-header bg-primary text-white text-center">
+
+                    <h3>Login</h3>
+
+                </div>
+
+                <div class="card-body">
+
+                    <form method="POST">
+
+                        <div class="mb-3">
+
+                            <label class="form-label">
+                                Email Address
+                            </label>
+
+                            <input
+                                type="email"
+                                class="form-control"
+                                name="email"
+                                placeholder="Enter your email"
+                                required>
+
+                        </div>
+
+                        <div class="mb-3">
+
+                            <label class="form-label">
+                                Password
+                            </label>
+
+                            <input
+                                type="password"
+                                class="form-control"
+                                name="password"
+                                placeholder="Enter your password"
+                                required>
+
+                        </div>
+
+                        <button
+                            class="btn btn-primary w-100">
+
+                            Login
+
+                        </button>
+
+                    </form>
+
+                    <hr>
+
+                    <p class="text-center">
+
+                        Don't have an account?
+
+                        <a href="/register">
+
+                            Register Here
+
+                        </a>
+
+                    </p>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</div>
+
+{% endblock %}

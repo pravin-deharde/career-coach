@@ -1,0 +1,144 @@
+{% extends "layout.html" %}
+
+{% block title %}Resume Builder{% endblock %}
+
+{% block content %}
+
+<div class="container mt-5">
+
+    <div class="row justify-content-center">
+
+        <div class="col-lg-10">
+
+            <div class="card shadow-lg">
+
+                <div class="card-header bg-warning">
+
+                    <h3 class="text-center">
+                        ATS Resume Builder
+                    </h3>
+
+                </div>
+
+                <div class="card-body">
+
+                    <form method="POST">
+
+                        <div class="row">
+
+                            <div class="col-md-6 mb-3">
+
+                                <label class="form-label">
+                                    Full Name
+                                </label>
+
+                                <input
+                                    type="text"
+                                    class="form-control"
+                                    name="full_name"
+                                    value="{{ session['user_name'] }}"
+                                    readonly>
+
+                            </div>
+
+                            <div class="col-md-6 mb-3">
+
+                                <label class="form-label">
+                                    Email
+                                </label>
+
+                                <input
+                                    type="email"
+                                    class="form-control"
+                                    name="email"
+                                    placeholder="Enter Email">
+
+                            </div>
+
+                        </div>
+
+                        <div class="mb-3">
+
+                            <label class="form-label">
+                                Education
+                            </label>
+
+                            <textarea
+                                class="form-control"
+                                rows="3"
+                                name="education"
+                                placeholder="Enter your education details">{{ resume.education if resume else "" }}</textarea>
+
+                        </div>
+
+                        <div class="mb-3">
+
+                            <label class="form-label">
+                                Skills
+                            </label>
+
+                            <textarea
+                                class="form-control"
+                                rows="3"
+                                name="skills"
+                                placeholder="Example: Python, Flask, PostgreSQL">{{ resume.skills if resume else "" }}</textarea>
+
+                        </div>
+
+                        <div class="mb-3">
+
+                            <label class="form-label">
+                                Projects
+                            </label>
+
+                            <textarea
+                                class="form-control"
+                                rows="4"
+                                name="projects"
+                                placeholder="Describe your projects">{{ resume.projects if resume else "" }}</textarea>
+
+                        </div>
+
+                        <div class="mb-3">
+
+                            <label class="form-label">
+                                Experience
+                            </label>
+
+                            <textarea
+                                class="form-control"
+                                rows="4"
+                                name="experience"
+                                placeholder="Internship / Experience">{{ resume.experience if resume else "" }}</textarea>
+
+                        </div>
+
+                        <button
+                            type="submit"
+                            class="btn btn-success">
+
+                            Save Resume
+
+                        </button>
+
+                        <a
+href="/resume/download"
+class="btn btn-primary ms-2">
+
+Download PDF
+
+</a>
+
+                    </form>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</div>
+
+{% endblock %}

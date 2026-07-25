@@ -1,0 +1,71 @@
+{% extends "layout.html" %}
+
+{% block title %}Career Roadmap{% endblock %}
+
+{% block content %}
+
+<div class="container mt-5">
+
+    <h2 class="text-center mb-5">
+        Career Roadmap
+    </h2>
+
+    <div class="card shadow">
+
+        <div class="card-body">
+
+            <div class="timeline">
+
+                {% for step in roadmap %}
+
+                <div class="d-flex mb-4">
+
+                    <div class="me-4">
+
+                        <span class="badge bg-primary fs-5">
+
+                            {{ loop.index }}
+
+                        </span>
+
+                    </div>
+
+                    <div>
+
+                        <h5>
+
+                            {{ step }}
+
+                        </h5>
+
+                        <p class="text-muted">
+
+                            Complete this step successfully before moving to the next stage of your career journey.
+
+                        </p>
+
+                    </div>
+
+                </div>
+
+                {% endfor %}
+
+            </div>
+
+        </div>
+
+    </div>
+
+    <div class="text-center mt-4">
+
+        <a href="/career" class="btn btn-primary">
+
+            Back to Career Guidance
+
+        </a>
+
+    </div>
+
+</div>
+
+{% endblock %}

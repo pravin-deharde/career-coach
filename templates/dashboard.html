@@ -1,0 +1,264 @@
+{% extends "layout.html" %}
+
+{% block title %}Dashboard{% endblock %}
+
+{% block content %}
+
+<div class="container mt-4">
+
+    <div class="p-5 mb-4 bg-primary text-white rounded">
+
+        <h2>Welcome, {{ name }} 👋</h2>
+
+        <p>
+            Role : <strong>{{ role }}</strong>
+        </p>
+
+        <p>
+            Welcome to Career Coach Dashboard.
+            Here you can manage your career, resume, roadmap and jobs.
+        </p>
+
+    </div>
+<div class="row mb-4">
+
+    <div class="col-md-4">
+
+        <div class="card shadow text-center">
+
+            <div class="card-body">
+
+                <h1 class="text-primary">
+
+                    {{ total_jobs }}
+
+                </h1>
+
+                <h5>
+
+                    Total Jobs
+
+                </h5>
+
+            </div>
+
+        </div>
+
+    </div>
+
+    <div class="col-md-4">
+
+        <div class="card shadow text-center">
+
+            <div class="card-body">
+
+                <h1 class="text-success">
+
+                    {{ applied_jobs }}
+
+                </h1>
+
+                <h5>
+
+                    Applied Jobs
+
+                </h5>
+
+            </div>
+
+        </div>
+
+    </div>
+
+    <div class="col-md-4">
+
+        <div class="card shadow text-center">
+
+            <div class="card-body">
+
+                <h1 class="text-warning">
+
+                    {{ total_resumes }}
+
+                </h1>
+
+                <h5>
+
+                    Total Resumes
+
+                </h5>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</div>
+    <div class="row">
+
+        <div class="col-md-3 mb-4">
+
+            <div class="card shadow h-100">
+
+                <div class="card-body text-center">
+
+                    <h4>Career Guidance</h4>
+
+                    <p>
+                        Explore career opportunities and required skills.
+                    </p>
+
+                    <a href="/career" class="btn btn-primary">
+                        Open
+                    </a>
+
+                </div>
+
+            </div>
+
+        </div>
+
+        <div class="col-md-3 mb-4">
+
+            <div class="card shadow h-100">
+
+                <div class="card-body text-center">
+
+                    <h4>Learning Roadmap</h4>
+
+                    <p>
+                        View your step-by-step career roadmap.
+                    </p>
+
+                    <a href="/roadmap" class="btn btn-success">
+                        Open
+                    </a>
+
+                </div>
+
+            </div>
+
+        </div>
+
+        <div class="col-md-3 mb-4">
+
+            <div class="card shadow h-100">
+
+                <div class="card-body text-center">
+
+                    <h4>Resume Builder</h4>
+
+                    <p>
+                        Create your ATS-friendly professional resume.
+                    </p>
+
+                    <a href="/resume" class="btn btn-warning text-dark">
+                        Open
+                    </a>
+
+                </div>
+
+            </div>
+
+        </div>
+
+        <div class="col-md-3 mb-4">
+
+            <div class="card shadow h-100">
+
+                <div class="card-body text-center">
+
+                    <h4>Job Portal</h4>
+
+                    <p>
+                        Find jobs and apply directly.
+                    </p>
+
+                    <a href="/jobs" class="btn btn-danger">
+                        Open
+                    </a>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+    <div class="row mt-3">
+
+        <div class="col-md-6 mb-4">
+
+            <div class="card shadow">
+
+                <div class="card-header bg-info text-white">
+
+                    Quick Actions
+
+                </div>
+
+                <div class="card-body">
+
+                    <a href="/profile" class="btn btn-outline-primary w-100 mb-2">
+                        My Profile
+                    </a>
+
+                    <a href="/resume" class="btn btn-outline-success w-100 mb-2">
+                        Update Resume
+                    </a>
+
+                    <a href="/jobs" class="btn btn-outline-dark w-100 mb-2">
+                        Browse Jobs
+                    </a>
+
+                    <a href="/logout" class="btn btn-outline-danger w-100">
+                        Logout
+                    </a>
+
+                </div>
+
+            </div>
+
+        </div>
+
+        <div class="col-md-6 mb-4">
+
+            <div class="card shadow">
+
+                <div class="card-header bg-secondary text-white">
+
+                    Dashboard Information
+
+                </div>
+
+                <div class="card-body">
+
+                    <ul>
+
+                        <li>Career Guidance Available</li>
+
+                        <li>Resume Builder Available</li>
+
+                        <li>Roadmap Generator Available</li>
+
+                        <li>Job Search Available</li>
+
+                        <li>Company Recruitment Module</li>
+
+                        <li>Admin Management Module</li>
+
+                    </ul>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</div>
+
+{% endblock %}

@@ -1,0 +1,132 @@
+{% extends "layout.html" %}
+
+{% block title %}Register{% endblock %}
+
+{% block content %}
+
+<div class="container">
+
+    <div class="row justify-content-center">
+
+        <div class="col-md-7">
+
+            <div class="card shadow-lg mt-5">
+
+                <div class="card-header bg-success text-white text-center">
+
+                    <h3>Create New Account</h3>
+
+                </div>
+
+                <div class="card-body">
+
+                    <form method="POST">
+
+                        <div class="mb-3">
+
+                            <label class="form-label">
+                                Full Name
+                            </label>
+
+                            <input
+                                type="text"
+                                class="form-control"
+                                name="full_name"
+                                placeholder="Enter Full Name"
+                                required>
+
+                        </div>
+
+                        <div class="mb-3">
+
+                            <label class="form-label">
+                                Email Address
+                            </label>
+
+                            <input
+                                type="email"
+                                class="form-control"
+                                name="email"
+                                placeholder="Enter Email"
+                                required>
+
+                        </div>
+
+                        <div class="mb-3">
+
+                            <label class="form-label">
+                                Password
+                            </label>
+
+                            <input
+                                type="password"
+                                class="form-control"
+                                name="password"
+                                placeholder="Create Password"
+                                required>
+
+                        </div>
+
+                        <div class="mb-3">
+
+                            <label class="form-label">
+                                Select Role
+                            </label>
+
+                            <select
+                                class="form-select"
+                                name="role"
+                                required>
+
+                                <option value="">Choose Role</option>
+
+                                <option value="student">
+                                    Student
+                                </option>
+
+                                <option value="company">
+                                    Company
+                                </option>
+
+                                <option value="admin">
+                                    Admin
+                                </option>
+
+                            </select>
+
+                        </div>
+
+                        <button
+                            class="btn btn-success w-100">
+
+                            Register
+
+                        </button>
+
+                    </form>
+
+                    <hr>
+
+                    <p class="text-center">
+
+                        Already have an account?
+
+                        <a href="/login">
+
+                            Login Here
+
+                        </a>
+
+                    </p>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</div>
+
+{% endblock %}

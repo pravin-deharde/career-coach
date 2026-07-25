@@ -1,0 +1,32 @@
+{% extends "layout.html" %}
+
+{% block content %}
+
+<div class="container mt-5">
+
+<h1>{{ full_name }}</h1>
+
+<hr>
+
+<h4>Email</h4>
+<p>{{ email }}</p>
+
+<h4>Phone</h4>
+<p>{{ phone }}</p>
+
+<h4>Skills</h4>
+<p>{{ skills }}</p>
+
+<h4>Education</h4>
+<p>{{ education }}</p>
+
+<h4>Projects</h4>
+<p>{{ projects }}</p>
+
+<a href="/resume" class="btn btn-primary">
+Edit Resume
+</a>
+
+</div>
+
+{% endblock %}

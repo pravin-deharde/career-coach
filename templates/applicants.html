@@ -1,0 +1,85 @@
+{% extends "layout.html" %}
+
+{% block title %}Applicants{% endblock %}
+
+{% block content %}
+
+<div class="container mt-5">
+
+<h2 class="mb-4">
+
+Applicants List
+
+</h2>
+
+<table class="table table-bordered table-striped">
+
+<thead class="table-dark">
+
+<tr>
+
+<th>ID</th>
+
+<th>Name</th>
+
+<th>Email</th>
+
+<th>Status</th>
+
+<th>Action</th>
+
+</tr>
+
+</thead>
+
+<tbody>
+
+{% for application, user in applications %}
+
+<tr>
+
+<td>{{ application.id }}</td>
+
+<td>{{ user.full_name }}</td>
+
+<td>{{ user.email }}</td>
+
+<td>
+
+<span class="badge bg-success">
+
+{{ application.status }}
+
+</span>
+
+</td>
+
+<td>
+
+<a href="/application/accept/{{ application.id }}"
+class="btn btn-success btn-sm">
+
+Accept
+
+</a>
+
+<a href="/application/reject/{{ application.id }}"
+class="btn btn-danger btn-sm ms-2">
+
+Reject
+
+</a>
+
+</td>
+
+</tr>
+
+{% endfor %}
+
+</tbody>
+
+</table>
+
+</div>
+
+{% endblock %}

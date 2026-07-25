@@ -1,0 +1,139 @@
+{% extends "layout.html" %}
+
+{% block title %}Job Portal{% endblock %}
+
+{% block content %}
+
+<div class="container mt-5">
+
+    <h2 class="text-center mb-4">
+
+        Latest Job Opportunities
+
+    </h2>
+    <form method="GET" action="/jobs" class="mb-4">
+
+    <div class="input-group">
+
+        <input
+            type="text"
+            class="form-control"
+            name="search"
+            placeholder="Search Job Title..."
+            value="{{ keyword }}">
+
+        <button class="btn btn-primary">
+
+            Search
+
+        </button>
+
+    </div>
+
+</form>
+
+    {% if jobs %}
+
+    <div class="row">
+
+        {% for job in jobs %}
+
+        <div class="col-lg-6 mb-4">
+
+            <div class="card shadow h-100">
+
+                <div class="card-body">
+
+                    <h3 class="text-primary">
+
+                        {{ job.title }}
+
+                    </h3>
+
+                    <hr>
+
+                    <p>
+
+                        <strong>Company :</strong>
+
+                        {{ job.company }}
+
+                    </p>
+
+                    <p>
+
+                        <strong>Location :</strong>
+
+                        {{ job.location }}
+
+                    </p>
+
+                    <p>
+
+                        <strong>Salary :</strong>
+
+                        <span class="text-success fw-bold">
+
+                            {{ job.salary }}
+
+                        </span>
+
+                    </p>
+
+                    <p>
+
+                        <strong>Description :</strong>
+
+                    </p>
+
+                    <p>
+
+                        {{ job.description }}
+
+                    </p>
+
+                </div>
+
+                <div class="card-footer bg-white">
+
+                    <a
+href="/apply/{{ job.id }}"
+class="btn btn-success w-100">
+
+Apply Now
+
+</a>
+
+                </div>
+
+            </div>
+
+        </div>
+
+        {% endfor %}
+
+    </div>
+
+    {% else %}
+
+    <div class="alert alert-warning text-center">
+
+        <h4>
+
+            No Jobs Available
+
+        </h4>
+
+        <p>
+
+            Companies have not posted any jobs yet.
+
+        </p>
+
+    </div>
+
+    {% endif %}
+
+</div>
+
+{% endblock %}

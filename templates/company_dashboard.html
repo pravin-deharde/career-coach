@@ -1,0 +1,97 @@
+{% extends "layout.html" %}
+
+{% block title %}Company Dashboard{% endblock %}
+
+{% block content %}
+
+<div class="container mt-5">
+
+    <div class="card shadow mb-4">
+
+        <div class="card-body">
+
+            <h2 class="text-primary">
+                Company Dashboard
+            </h2>
+
+            <p>
+                Welcome Company. Here you can manage all posted jobs.
+            </p>
+
+            <a href="/company/post-job" class="btn btn-success">
+                + Post New Job
+            </a>
+
+        </div>
+
+    </div>
+
+    {% if jobs %}
+
+    <div class="row">
+
+        {% for job in jobs %}
+
+        <div class="col-md-6 mb-4">
+
+            <div class="card shadow h-100">
+
+                <div class="card-body">
+
+                    <h4>{{ job.title }}</h4>
+
+                    <hr>
+
+                    <p>
+                        <strong>Company :</strong>
+                        {{ job.company }}
+                    </p>
+
+                    <p>
+                        <strong>Location :</strong>
+                        {{ job.location }}
+                    </p>
+
+                    <p>
+                        <strong>Salary :</strong>
+                        {{ job.salary }}
+                    </p>
+
+                    <p>
+                        {{ job.description }}
+                    </p>
+
+                </div>
+
+                <div class="card-footer bg-white">
+
+                    <a href="/company/applicants/{{ job.id }}"
+                       class="btn btn-primary w-100">
+
+                        View Applicants
+
+                    </a>
+
+                </div>
+
+            </div>
+
+        </div>
+
+        {% endfor %}
+
+    </div>
+
+    {% else %}
+
+    <div class="alert alert-warning">
+
+        No Jobs Posted Yet.
+
+    </div>
+
+    {% endif %}
+
+</div>
+
+{% endblock %}
