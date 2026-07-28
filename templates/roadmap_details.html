@@ -1,0 +1,169 @@
+{% extends "layout.html" %}
+
+{% block title %}{{ course_name }} Roadmap{% endblock %}
+
+{% block content %}
+
+<div class="container py-5">
+
+    <div class="feature-card p-5">
+
+        <h1 class="text-center mb-4">
+            🚀 {{ course_name }} Roadmap
+        </h1>
+
+        <div class="text-center mb-4">
+
+            <span class="badge bg-info fs-5 p-3">
+
+                Duration : {{ roadmap.duration }}
+
+            </span>
+
+        </div>
+
+        <hr>
+
+        {% for step in roadmap.steps %}
+
+        <div class="card feature-card mb-4">
+
+            <div class="card-body">
+
+                <h4 class="text-info">
+
+                    {{ step[0] }}
+
+                </h4>
+
+                <p>
+
+                    {{ step[1] }}
+
+                </p>
+
+            </div>
+
+        </div>
+
+        {% endfor %}
+
+        <hr>
+
+        <h3>📚 Recommended Skills</h3>
+
+        <ul>
+
+            <li>Communication Skills</li>
+
+            <li>Problem Solving</li>
+
+            <li>Programming Fundamentals</li>
+
+            <li>Git & GitHub</li>
+
+            <li>LinkedIn Profile</li>
+
+            <li>Resume Building</li>
+
+        </ul>
+
+        <hr>
+
+        <h3>🏆 Recommended Certifications</h3>
+
+        <ul>
+
+            <li>Google Career Certificate</li>
+
+            <li>Microsoft Learn</li>
+
+            <li>AWS Academy</li>
+
+            <li>Cisco Networking Academy</li>
+
+        </ul>
+
+        <hr>
+
+        <h3>💼 Placement Tips</h3>
+
+        <ul>
+
+            <li>Create an ATS Friendly Resume</li>
+
+            <li>Build 5+ Real World Projects</li>
+
+            <li>Practice Aptitude Daily</li>
+
+            <li>Prepare Technical & HR Interviews</li>
+
+            <li>Apply for Internships</li>
+
+        </ul>
+
+        <hr>
+
+        <h3 class="text-warning text-center">
+
+            🎯 Career Opportunities
+
+        </h3>
+
+        <div class="row mt-4">
+
+            <div class="col-md-3 mb-3">
+
+                <div class="feature-card p-3 text-center">
+
+                    💻
+
+                    <h5 class="mt-2">Software Engineer</h5>
+
+                </div>
+
+            </div>
+
+            <div class="col-md-3 mb-3">
+
+                <div class="feature-card p-3 text-center">
+
+                    🤖
+
+                    <h5 class="mt-2">AI Engineer</h5>
+
+                </div>
+
+            </div>
+
+            <div class="col-md-3 mb-3">
+
+                <div class="feature-card p-3 text-center">
+
+                    ☁️
+
+                    <h5 class="mt-2">Cloud Engineer</h5>
+
+                </div>
+
+            </div>
+
+            <div class="col-md-3 mb-3">
+
+                <div class="feature-card p-3 text-center">
+
+                    🔐
+
+                    <h5 class="mt-2">Cyber Security</h5>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</div>
+
+{% endblock %}

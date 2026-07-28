@@ -1,3 +1,5 @@
+from data.career_data import career_data
+from data.roadmap_data import roadmaps
 from flask import Flask, render_template, request, redirect, url_for, session, flash
 from werkzeug.security import generate_password_hash, check_password_hash
 from database.models import User, Job, Resume, JobApplication
@@ -165,77 +167,60 @@ def profile():
 @app.route("/career")
 def career():
 
-    if "user_id" not in session:
-        return redirect(url_for("login"))
+    return render_template("career_home.html")
+@app.route("/career/<category>")
+def career_category(category):
 
-    careers = [
-
-        {
-            "name": "Python Developer",
-            "salary": "5 - 12 LPA",
-            "skills": "Python, Flask, PostgreSQL"
-        },
-
-        {
-            "name": "Data Scientist",
-            "salary": "8 - 20 LPA",
-            "skills": "Python, Machine Learning, SQL"
-        },
-
-        {
-            "name": "Java Developer",
-            "salary": "4 - 10 LPA",
-            "skills": "Java, Spring Boot"
-        },
-
-        {
-            "name": "Full Stack Developer",
-            "salary": "6 - 15 LPA",
-            "skills": "HTML, CSS, JavaScript, Flask"
-        }
-
-    ]
+    courses = career_data.get(category, [])
 
     return render_template(
-        "career.html",
-        careers=careers
+
+        "career_list.html",
+
+        courses=courses,
+
+        category=category
+
     )
+@app.route("/career/details/<title>")
+def career_details(title):
 
+    for category in career_data.values():
 
+        for course in category:
+
+            if course["title"] == title:
+
+                return render_template(
+
+                    "career_details.html",
+
+                    course=course
+
+                )
+
+    return "Course Not Found"
 # -----------------------------
 # ROADMAP
 # -----------------------------
 
-@app.route("/roadmap")
-def roadmap():
+@app.route("/roadmap/<course_name>")
+def roadmap(course_name):
 
     if "user_id" not in session:
         return redirect(url_for("login"))
 
-    roadmap = [
+    roadmap = roadmaps.get(course_name)
 
-        "Learn Programming",
-
-        "Learn Database",
-
-        "Learn Web Development",
-
-        "Build Projects",
-
-        "Prepare Resume",
-
-        "Practice Interview",
-
-        "Apply Jobs"
-
-    ]
+    if roadmap is None:
+        flash("Roadmap not available.")
+        return redirect(url_for("career"))
 
     return render_template(
-        "roadmap.html",
-        roadmap=roadmap
+        "roadmap_details.html",
+        roadmap=roadmap,
+        course_name=course_name
     )
-
-
 # -----------------------------
 # JOBS
 # -----------------------------
@@ -280,39 +265,42 @@ def resume():
 
     if request.method == "POST":
 
-        education = request.form.get("education")
-        skills = request.form.get("skills")
-        projects = request.form.get("projects")
-        experience = request.form.get("experience")
+        if not resume:
+            resume = Resume(user_id=session["user_id"])
+            db.session.add(resume)
 
-        if resume:
+        resume.name = request.form.get("name")
+        resume.email = request.form.get("email")
+        resume.phone = request.form.get("phone")
+        resume.summary = request.form.get("summary")
+        resume.education = request.form.get("education")
+        resume.skills = request.form.get("skills")
+        resume.projects = request.form.get("projects")
+        resume.experience = request.form.get("experience")
+        resume.certifications = request.form.get("certifications")
+        resume.languages = request.form.get("languages")
+        resume.github = request.form.get("github")
+        resume.linkedin = request.form.get("linkedin")
+        resume.template = request.form.get("template")
 
-            resume.education = education
-            resume.skills = skills
-            resume.projects = projects
-            resume.experience = experience
+        photo = request.files.get("photo")
 
-        else:
+        if photo and photo.filename != "":
 
-            resume = Resume(
+            filename = secure_filename(photo.filename)
 
-                user_id=session["user_id"],
-
-                education=education,
-
-                skills=skills,
-
-                projects=projects,
-
-                experience=experience
-
+            photo.save(
+                os.path.join(
+                    app.config["UPLOAD_FOLDER"],
+                    filename
+                )
             )
 
-            db.session.add(resume)
+            resume.photo = filename
 
         db.session.commit()
 
-        flash("Resume Saved Successfully!")
+        flash("Professional Resume Saved Successfully!")
 
         return redirect(url_for("resume"))
 
@@ -652,7 +640,136 @@ def page_not_found(error):
 def internal_server_error(error):
     return render_template("500.html"), 500
 
+@app.route("/ai-career", methods=["GET","POST"])
+def ai_career():
 
+    result = None
+
+    if request.method == "POST":
+
+        subject = request.form["subject"]
+
+        interest = request.form["interest"]
+
+        communication = request.form["communication"]
+
+        if interest == "Programming":
+
+            result = "Software Engineer / AI Engineer"
+
+        elif interest == "Medical":
+
+            result = "Doctor / Pharmacist"
+
+        elif interest == "Business":
+
+            result = "CA / MBA / Entrepreneur"
+
+        elif interest == "Government Job":
+
+            result = "UPSC / MPSC / SSC"
+
+        elif interest == "Teaching":
+
+            result = "Professor / Lecturer"
+
+        elif interest == "Research":
+
+            result = "Scientist"
+
+        else:
+
+            result = "Choose a suitable career."
+
+    return render_template(
+
+        "ai_career.html",
+
+        result=result
+
+    )
+@app.route("/ai-resume", methods=["GET","POST"])
+def ai_resume():
+
+    score = None
+
+    missing = []
+
+    suggestions = []
+
+    keywords = [
+
+        "python",
+
+        "sql",
+
+        "git",
+
+        "github",
+
+        "flask",
+
+        "html",
+
+        "css",
+
+        "javascript",
+
+        "aws",
+
+        "docker"
+
+    ]
+
+    if request.method == "POST":
+
+        resume = request.form["resume"].lower()
+
+        found = 0
+
+        for skill in keywords:
+
+            if skill in resume:
+
+                found += 1
+
+            else:
+
+                missing.append(skill.upper())
+
+        score = int(found / len(keywords) * 100)
+
+        if score < 40:
+
+            suggestions.append("Resume needs major improvements.")
+
+        elif score < 70:
+
+            suggestions.append("Add more technical skills.")
+
+        else:
+
+            suggestions.append("Excellent ATS Resume.")
+
+        suggestions.append("Add GitHub Profile")
+
+        suggestions.append("Add LinkedIn Profile")
+
+        suggestions.append("Add 2 Projects")
+
+        suggestions.append("Use Action Verbs")
+
+    return render_template(
+
+        "ai_resume.html",
+
+        score=score,
+
+        missing=missing,
+
+        suggestions=suggestions
+
+    )
 # -----------------------------
 # MAIN
 # -----------------------------

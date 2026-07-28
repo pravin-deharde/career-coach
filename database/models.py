@@ -59,8 +59,27 @@ class Resume(db.Model):
     projects = db.Column(db.Text)
 
     experience = db.Column(db.Text)
+    name = db.Column(db.String(100))
 
-    created_at = db.Column(
+email = db.Column(db.String(100))
+
+phone = db.Column(db.String(20))
+
+summary = db.Column(db.Text)
+
+certifications = db.Column(db.Text)
+
+languages = db.Column(db.Text)
+
+github = db.Column(db.String(200))
+
+linkedin = db.Column(db.String(200))
+
+template = db.Column(db.String(50))
+
+photo = db.Column(db.String(200))
+
+created_at = db.Column(
         db.DateTime,
         server_default=db.func.now()
     )

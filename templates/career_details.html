@@ -1,0 +1,68 @@
+{% extends "layout.html" %}
+
+{% block title %}Career Details{% endblock %}
+
+{% block content %}
+
+<div class="container py-5">
+
+    <div class="feature-card p-5">
+
+        <h1 class="text-info">
+            {{ course.title }}
+        </h1>
+
+        <hr>
+
+        <div class="row">
+
+            <div class="col-md-6">
+
+                <h5>📅 Duration</h5>
+                <p>{{ course.duration }}</p>
+
+                <h5>🎓 Eligibility</h5>
+                <p>{{ course.eligibility }}</p>
+
+            </div>
+
+            <div class="col-md-6">
+
+                <h5>📝 Entrance Exam</h5>
+                <p>{{ course.entrance }}</p>
+
+                <h5>💰 Average Salary</h5>
+                <p class="text-success fw-bold">
+                    {{ course.salary }}
+                </p>
+
+            </div>
+
+        </div>
+
+        <hr>
+
+        <h4>Description</h4>
+
+        <p>
+
+            {{ course.description }}
+
+        </p>
+
+        <div class="mt-4">
+
+            <a href="{{ url_for('roadmap', course_name=course.title) }}"
+               class="btn btn-glow">
+
+                🚀 View Complete Roadmap
+
+            </a>
+
+        </div>
+
+    </div>
+
+</div>
+
+{% endblock %}

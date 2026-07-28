@@ -4,70 +4,155 @@
 
 {% block content %}
 
-<div class="container mt-5">
+<div class="container py-5">
 
-    <h2 class="text-center mb-4">
-        Career Guidance
-    </h2>
+    <div class="text-center mb-5">
 
-    <div class="row">
+        <h1 class="hero-title">
+            Choose Your <span>Career Path</span>
+        </h1>
 
-        {% for career in careers %}
+        <p class="hero-subtitle">
 
-        <div class="col-md-6 col-lg-4 mb-4">
+            Select your current qualification and explore the best career opportunities available in India.
 
-            <div class="card shadow h-100">
+        </p>
 
-                <div class="card-body">
+    </div>
 
-                    <h4 class="text-primary">
-                        {{ career.name }}
-                    </h4>
+    <div class="row g-4">
 
-                    <hr>
+        <div class="col-md-4">
 
-                    <h6>Required Skills</h6>
+            <div class="feature-card text-center p-4">
 
-                    <p>
+                <h3>🎓 10th Pass</h3>
 
-                        {{ career.skills }}
+                <p>
 
-                    </p>
+                    Explore Diploma, Science, Commerce and Arts options after 10th.
 
-                    <h6>Average Salary</h6>
+                </p>
 
-                    <p class="text-success fw-bold">
+                <a href="/career/10th" class="btn btn-glow w-100">
 
-                        {{ career.salary }}
+                    Explore
 
-                    </p>
-
-                    <h6>Description</h6>
-
-                    <p>
-
-                        Build your career as a {{ career.name }} by learning the required technologies and gaining practical project experience.
-
-                    </p>
-
-                </div>
-
-                <div class="card-footer bg-white">
-
-                    <a href="/roadmap"
-                       class="btn btn-primary w-100">
-
-                        View Roadmap
-
-                    </a>
-
-                </div>
+                </a>
 
             </div>
 
         </div>
 
-        {% endfor %}
+        <div class="col-md-4">
+
+            <div class="feature-card text-center p-4">
+
+                <h3>📚 Diploma</h3>
+
+                <p>
+
+                    Check branches, higher studies and career opportunities after Diploma.
+
+                </p>
+
+                <a href="/career/diploma" class="btn btn-glow w-100">
+
+                    Explore
+
+                </a>
+
+            </div>
+
+        </div>
+
+        <div class="col-md-4">
+
+            <div class="feature-card text-center p-4">
+
+                <h3>🧪 12th Science</h3>
+
+                <p>
+
+                    Engineering, Medical, BCA, AI, Cyber Security, NDA and many more.
+
+                </p>
+
+                <a href="/career/science" class="btn btn-glow w-100">
+
+                    Explore
+
+                </a>
+
+            </div>
+
+        </div>
+
+        <div class="col-md-4">
+
+            <div class="feature-card text-center p-4">
+
+                <h3>💼 12th Commerce</h3>
+
+                <p>
+
+                    CA, CS, CMA, BBA, B.Com, Banking, Finance and Management.
+
+                </p>
+
+                <a href="/career/commerce" class="btn btn-glow w-100">
+
+                    Explore
+
+                </a>
+
+            </div>
+
+        </div>
+
+        <div class="col-md-4">
+
+            <div class="feature-card text-center p-4">
+
+                <h3>🎨 12th Arts</h3>
+
+                <p>
+
+                    Law, Journalism, Fashion, Psychology, Hotel Management and more.
+
+                </p>
+
+                <a href="/career/arts" class="btn btn-glow w-100">
+
+                    Explore
+
+                </a>
+
+            </div>
+
+        </div>
+
+        <div class="col-md-4">
+
+            <div class="feature-card text-center p-4">
+
+                <h3>🎯 Graduation</h3>
+
+                <p>
+
+                    MBA, M.Tech, Government Exams, Higher Studies and Professional Careers.
+
+                </p>
+
+                <a href="/career/graduation" class="btn btn-glow w-100">
+
+                    Explore
+
+                </a>
+
+            </div>
+
+        </div>
 
     </div>
 

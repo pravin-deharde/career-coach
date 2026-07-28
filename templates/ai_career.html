@@ -1,0 +1,107 @@
+{% extends "layout.html" %}
+
+{% block title %}AI Resume Scanner{% endblock %}
+
+{% block content %}
+
+<div class="container py-5">
+
+<div class="feature-card p-5">
+
+<h1 class="text-center mb-5">
+
+🤖 AI Resume Scanner
+
+</h1>
+
+<form method="POST">
+
+<label class="form-label">
+
+Paste Resume Skills
+
+</label>
+
+<textarea
+
+class="form-control"
+
+rows="10"
+
+name="resume">
+
+</textarea>
+
+<button
+
+class="btn btn-glow mt-4 w-100">
+
+Scan Resume
+
+</button>
+
+</form>
+
+{% if score %}
+
+<hr>
+
+<h2>
+
+ATS SCORE
+
+</h2>
+
+<div class="progress">
+
+<div
+
+class="progress-bar bg-success"
+
+style="width:{{score}}%">
+
+{{score}}%
+
+</div>
+
+</div>
+
+<h3 class="mt-4">
+
+Missing Skills
+
+</h3>
+
+<ul>
+
+{% for item in missing %}
+
+<li>{{item}}</li>
+
+{% endfor %}
+
+</ul>
+
+<h3>
+
+Suggestions
+
+</h3>
+
+<ul>
+
+{% for item in suggestions %}
+
+<li>{{item}}</li>
+
+{% endfor %}
+
+</ul>
+
+{% endif %}
+
+</div>
+
+</div>
+
+{% endblock %}
