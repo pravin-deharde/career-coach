@@ -209,7 +209,7 @@ def roadmap(course_name):
 
     if "user_id" not in session:
         return redirect(url_for("login"))
-
+    print("Course Name:", repr(course_name))
     roadmap = roadmaps.get(course_name)
 
     if roadmap is None:
