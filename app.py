@@ -185,18 +185,15 @@ def career_category(category):
 @app.route("/career/details/<title>")
 def career_details(title):
 
+    print("URL se aaya title:", repr(title))
+    print("career_data keys:", list(career_data.keys()))
+
     for category in career_data.values():
-
         for course in category:
-
             if course["title"] == title:
-
                 return render_template(
-
                     "career_details.html",
-
                     course=course
-
                 )
 
     return "Course Not Found"
