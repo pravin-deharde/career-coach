@@ -1,8 +1,9 @@
-/* =========================
-   GOOGLE FONT
-========================= */
+/* =====================================
+   CAREER COACH AI V2 - PART 1
+   Theme + Background + Navbar
+===================================== */
 
-@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap');
 
 *{
     margin:0;
@@ -11,319 +12,834 @@
     font-family:'Poppins',sans-serif;
 }
 
+html{
+    scroll-behavior:smooth;
+}
+
 body{
-    background:#f5f7fb;
+
+    background:#080b16;
+    color:#ffffff;
+    overflow-x:hidden;
+    min-height:100vh;
+    position:relative;
+
 }
 
-/* =========================
-   NAVBAR
-========================= */
+/* Animated Background */
 
-.navbar{
-    box-shadow:0 3px 15px rgba(0,0,0,.15);
+body::before{
+
+    content:"";
+    position:fixed;
+    inset:0;
+
+    background:
+    radial-gradient(circle at 15% 20%,rgba(0,255,255,.12),transparent 25%),
+    radial-gradient(circle at 80% 30%,rgba(140,0,255,.15),transparent 30%),
+    radial-gradient(circle at 50% 80%,rgba(0,180,255,.10),transparent 25%);
+
+    z-index:-2;
+
 }
 
-.navbar-brand{
+body::after{
+
+    content:"";
+    position:fixed;
+    inset:0;
+
+    background:
+    linear-gradient(rgba(255,255,255,.03) 1px,transparent 1px),
+    linear-gradient(90deg,rgba(255,255,255,.03) 1px,transparent 1px);
+
+    background-size:45px 45px;
+
+    opacity:.25;
+
+    z-index:-1;
+
+}
+
+/* Main Content */
+
+.main-content{
+
+    width:100%;
+    max-width:1400px;
+    margin:auto;
+    padding:40px 20px;
+
+}
+
+/* Navbar */
+
+.glass-navbar{
+
+    background:rgba(12,16,30,.75)!important;
+
+    backdrop-filter:blur(18px);
+
+    border-bottom:1px solid rgba(255,255,255,.08);
+
+    box-shadow:0 0 25px rgba(0,255,255,.10);
+
+}
+
+/* Logo */
+
+.logo{
+
     font-size:28px;
-    font-weight:bold;
+
+    font-weight:700;
+
+    color:#00d9ff!important;
+
+    text-shadow:0 0 18px #00d9ff;
+
 }
+
+/* Nav Links */
 
 .nav-link{
+
+    color:white!important;
+
+    margin-left:10px;
+
+    transition:.35s;
+
     font-weight:500;
-    transition:.3s;
+
 }
 
 .nav-link:hover{
-    color:#ffd43b !important;
+
+    color:#00d9ff!important;
+
+    text-shadow:0 0 12px #00d9ff;
+
 }
 
-/* =========================
-   HERO
-========================= */
+/* User Box */
 
-.hero{
-    padding:70px 0;
+.user-box{
+
+    padding:8px 16px;
+
+    border-radius:30px;
+
+    background:rgba(255,255,255,.08);
+
+    border:1px solid rgba(0,217,255,.4);
+
+    box-shadow:0 0 18px rgba(0,217,255,.18);
+
 }
 
-.hero h1{
-    font-size:55px;
+/* Footer */
+
+.footer-glass{
+
+    margin-top:80px;
+
+    padding:40px 20px;
+
+    background:rgba(10,15,28,.75);
+
+    backdrop-filter:blur(15px);
+
+    border-top:1px solid rgba(255,255,255,.08);
+
+}
+
+.footer-glass h4{
+
+    color:#00d9ff;
+
+    text-shadow:0 0 15px #00d9ff;
+
+}
+
+.footer-glass p{
+
+    color:#d7d7d7;
+
+}
+
+/* Headings */
+
+h1,h2,h3,h4,h5,h6{
+
     font-weight:700;
-}
-
-.hero p{
-    font-size:18px;
-    color:#666;
-}
-
-/* =========================
-   BUTTONS
-========================= */
-
-.btn{
-    border-radius:10px;
-    transition:.3s;
-}
-
-.btn:hover{
-    transform:translateY(-3px);
-}
-
-/* =========================
-   CARD
-========================= */
-
-.card{
-    border:none;
-    border-radius:15px;
-    transition:.3s;
-}
-
-.card:hover{
-    transform:translateY(-8px);
-    box-shadow:0 15px 35px rgba(0,0,0,.15);
-}
-
-.card-header{
-    border-radius:15px 15px 0 0 !important;
-}
-
-/* =========================
-   DASHBOARD
-========================= */
-
-.dashboard-card{
-    text-align:center;
-    padding:25px;
-}
-
-.dashboard-card h4{
-    margin-top:15px;
-}
-
-.dashboard-card i{
-    font-size:45px;
-    color:#0d6efd;
-}
-
-/* =========================
-   PROFILE
-========================= */
-
-.profile-img{
-    width:140px;
-    height:140px;
-    border-radius:50%;
-    object-fit:cover;
-    border:4px solid #0d6efd;
-}
-
-/* =========================
-   TABLE
-========================= */
-
-.table th{
-    background:#0d6efd;
-    color:white;
-}
-
-/* =========================
-   JOB CARD
-========================= */
-
-.job-card{
-    min-height:320px;
-}
-
-.job-card h3{
-    color:#0d6efd;
-}
-
-/* =========================
-   ROADMAP
-========================= */
-
-.timeline{
-    border-left:4px solid #0d6efd;
-    padding-left:20px;
-}
-
-.timeline .badge{
-    width:35px;
-    height:35px;
-    border-radius:50%;
-    display:flex;
-    justify-content:center;
-    align-items:center;
-}
-
-/* =========================
-   FORM
-========================= */
-
-.form-control,
-.form-select{
-    border-radius:10px;
-}
-
-textarea{
-    resize:none;
-}
-
-/* =========================
-   FOOTER
-========================= */
-
-footer{
-    margin-top:60px;
-    background:#0d6efd;
-    color:white;
-    text-align:center;
-    padding:20px;
-}
-
-/* =========================
-   ALERT
-========================= */
-
-.alert{
-    border-radius:10px;
-}
-
-/* =========================
-   RESPONSIVE
-========================= */
-
-@media(max-width:768px){
-
-.hero h1{
-    font-size:36px;
-}
-
-.navbar-brand{
-    font-size:22px;
-}
-
-.card{
-    margin-bottom:20px;
-}
-
-}
-.dashboard-stat{
-
-    transition:0.3s;
 
 }
 
-.dashboard-stat:hover{
+/* Links */
 
-    transform:scale(1.05);
+a{
 
-}
-body{
-
-background:#09090f;
-
-color:white;
-
-font-family:Poppins,sans-serif;
+    text-decoration:none;
 
 }
+/* =====================================
+   CAREER COACH AI V2 - PART 2
+   Hero + Buttons + Cards
+===================================== */
+
+/* Hero Section */
 
 .hero-section{
 
-padding:120px 0;
+    padding:90px 0;
 
 }
 
 .hero-title{
 
-font-size:65px;
-
-font-weight:700;
+    font-size:65px;
+    font-weight:800;
+    line-height:1.2;
 
 }
 
 .hero-title span{
 
-color:#00d4ff;
+    color:#00d9ff;
 
-text-shadow:
-
-0 0 20px #00d4ff;
+    text-shadow:
+    0 0 10px #00d9ff,
+    0 0 25px #00d9ff,
+    0 0 45px #00d9ff;
 
 }
 
 .hero-subtitle{
 
-font-size:20px;
-
-opacity:.8;
-
-margin-top:20px;
+    font-size:20px;
+    color:#cfcfcf;
+    margin-top:25px;
+    line-height:1.8;
 
 }
 
+.hero-image{
+
+    width:100%;
+    border-radius:25px;
+    margin-left:40px;
+
+    border:2px solid rgba(0,217,255,.3);
+
+    box-shadow:
+    0 0 25px rgba(0,217,255,.3),
+    0 0 60px rgba(0,217,255,.15);
+
+    transition:.5s;
+
+}
+
+.hero-image:hover{
+
+    transform:scale(1.03);
+
+    box-shadow:
+    0 0 40px #00d9ff,
+    0 0 80px rgba(0,217,255,.5);
+
+}
+
+/* Premium Button */
+
 .btn-glow{
 
-background:#00d4ff;
+    background:linear-gradient(90deg,#00d9ff,#0077ff);
 
-padding:14px 35px;
+    color:white;
 
-border-radius:40px;
+    padding:15px 38px;
 
-color:white;
+    border:none;
 
-text-decoration:none;
+    border-radius:50px;
 
-transition:.4s;
+    font-weight:600;
 
-box-shadow:
+    transition:.35s;
 
-0 0 20px #00d4ff;
+    box-shadow:0 0 25px rgba(0,217,255,.5);
 
 }
 
 .btn-glow:hover{
 
-transform:translateY(-5px);
+    transform:translateY(-5px);
 
-box-shadow:
+    color:white;
 
-0 0 40px #00d4ff;
+    box-shadow:
+    0 0 20px #00d9ff,
+    0 0 45px #00d9ff;
 
 }
 
-.hero-image{
-    width:100%;
-    border-radius:25px;
-    box-shadow:0 0 40px rgba(0,212,255,.4);
-    margin-left:40px;
+/* Outline Button */
+
+.btn-outline-light{
+
+    border:2px solid #00d9ff;
+
+    color:#00d9ff;
+
+    border-radius:50px;
+
+    padding:14px 35px;
+
+    transition:.35s;
+
 }
+
+.btn-outline-light:hover{
+
+    background:#00d9ff;
+
+    color:#000;
+
+    box-shadow:
+    0 0 20px #00d9ff,
+    0 0 40px #00d9ff;
+
+}
+
+/* Feature Cards */
 
 .feature-card{
 
-background:rgba(255,255,255,.05);
+    background:rgba(255,255,255,.05);
 
-border:1px solid rgba(255,255,255,.1);
+    border:1px solid rgba(255,255,255,.08);
 
-backdrop-filter:blur(15px);
+    backdrop-filter:blur(18px);
 
-transition:.4s;
+    border-radius:22px;
 
-border-radius:20px;
+    padding:20px;
 
-color:white;
+    overflow:hidden;
+
+    transition:.4s;
+
+    height:100%;
 
 }
 
 .feature-card:hover{
 
-transform:translateY(-10px);
+    transform:translateY(-12px);
 
-border:1px solid #00d4ff;
+    border:1px solid #00d9ff;
 
-box-shadow:
+    box-shadow:
+    0 0 18px rgba(0,217,255,.5),
+    0 0 45px rgba(0,217,255,.25);
 
-0 0 35px #00d4ff;
+}
+
+/* All Cards */
+
+.card{
+
+    background:rgba(255,255,255,.05);
+
+    color:white;
+
+    border:1px solid rgba(255,255,255,.08);
+
+    border-radius:20px;
+
+    transition:.35s;
+
+}
+
+.card:hover{
+
+    transform:translateY(-10px);
+
+    border-color:#00d9ff;
+
+    box-shadow:
+    0 0 25px rgba(0,217,255,.45);
+
+}
+
+.card-body{
+
+    padding:30px;
+
+}
+
+.card h4{
+
+    color:#00d9ff;
+
+    margin-bottom:15px;
+
+}
+
+.card p{
+
+    color:#d7d7d7;
+
+    line-height:1.7;
+
+}
+/* =====================================
+   CAREER COACH AI V2 - PART 3
+   Dashboard + Forms + Tables + Profile
+===================================== */
+
+/* Dashboard Cards */
+
+.dashboard-card{
+
+    background:rgba(255,255,255,.05);
+
+    border:1px solid rgba(255,255,255,.08);
+
+    border-radius:22px;
+
+    padding:30px;
+
+    text-align:center;
+
+    transition:.4s;
+
+    backdrop-filter:blur(18px);
+
+}
+
+.dashboard-card:hover{
+
+    transform:translateY(-10px);
+
+    border-color:#00d9ff;
+
+    box-shadow:
+    0 0 20px rgba(0,217,255,.45),
+    0 0 50px rgba(0,217,255,.20);
+
+}
+
+.dashboard-card i{
+
+    font-size:55px;
+
+    color:#00d9ff;
+
+    margin-bottom:20px;
+
+    text-shadow:0 0 20px #00d9ff;
+
+}
+
+.dashboard-card h3{
+
+    color:white;
+
+    font-weight:700;
+
+}
+
+.dashboard-card p{
+
+    color:#d8d8d8;
+
+}
+
+/* Forms */
+
+.form-control,
+.form-select{
+
+    background:rgba(255,255,255,.05);
+
+    color:white;
+
+    border:1px solid rgba(255,255,255,.15);
+
+    border-radius:14px;
+
+    padding:14px;
+
+}
+
+.form-control:focus,
+.form-select:focus{
+
+    background:rgba(255,255,255,.08);
+
+    color:white;
+
+    border-color:#00d9ff;
+
+    box-shadow:
+    0 0 15px rgba(0,217,255,.5);
+
+}
+
+/* Placeholder */
+
+.form-control::placeholder{
+
+    color:#bdbdbd;
+
+}
+
+/* Labels */
+
+label{
+
+    color:#00d9ff;
+
+    font-weight:600;
+
+    margin-bottom:8px;
+
+}
+
+/* Tables */
+
+.table{
+
+    color:white;
+
+    border-radius:15px;
+
+    overflow:hidden;
+
+}
+
+.table thead{
+
+    background:#00d9ff;
+
+    color:#000;
+
+}
+
+.table tbody tr{
+
+    background:rgba(255,255,255,.04);
+
+    transition:.3s;
+
+}
+
+.table tbody tr:hover{
+
+    background:rgba(0,217,255,.15);
+
+}
+
+/* Job Cards */
+
+.job-card{
+
+    background:rgba(255,255,255,.05);
+
+    border:1px solid rgba(255,255,255,.08);
+
+    border-radius:20px;
+
+    padding:25px;
+
+    transition:.35s;
+
+}
+
+.job-card:hover{
+
+    transform:translateY(-8px);
+
+    border-color:#00d9ff;
+
+    box-shadow:
+    0 0 22px rgba(0,217,255,.45);
+
+}
+
+.job-card h3{
+
+    color:#00d9ff;
+
+}
+
+/* Profile */
+
+.profile-img{
+
+    width:170px;
+
+    height:170px;
+
+    border-radius:50%;
+
+    object-fit:cover;
+
+    border:4px solid #00d9ff;
+
+    box-shadow:
+    0 0 25px rgba(0,217,255,.45);
+
+}
+
+/* Alerts */
+
+.alert{
+
+    border:none;
+
+    border-radius:15px;
+
+    background:rgba(0,217,255,.15);
+
+    color:white;
+
+}
+/* =====================================
+   CAREER COACH AI V2 - PART 4
+   Animations + Effects + Responsive
+===================================== */
+
+/* Smooth Animation */
+
+*{
+    transition:.3s ease;
+}
+
+/* Glow Animation */
+
+@keyframes glow{
+
+    0%{
+
+        box-shadow:0 0 10px rgba(0,217,255,.2);
+
+    }
+
+    50%{
+
+        box-shadow:
+        0 0 20px rgba(0,217,255,.6),
+        0 0 40px rgba(0,217,255,.3);
+
+    }
+
+    100%{
+
+        box-shadow:0 0 10px rgba(0,217,255,.2);
+
+    }
+
+}
+
+/* Floating Animation */
+
+@keyframes floating{
+
+    0%{
+
+        transform:translateY(0px);
+
+    }
+
+    50%{
+
+        transform:translateY(-12px);
+
+    }
+
+    100%{
+
+        transform:translateY(0px);
+
+    }
+
+}
+
+/* Hero Image */
+
+.hero-image{
+
+    animation:floating 5s ease-in-out infinite;
+
+}
+
+/* Buttons */
+
+.btn{
+
+    transition:.35s;
+
+}
+
+.btn:hover{
+
+    transform:translateY(-5px);
+
+}
+
+/* Card Glow */
+
+.card:hover,
+.feature-card:hover,
+.dashboard-card:hover,
+.job-card:hover{
+
+    animation:glow 2s infinite;
+
+}
+
+/* Scrollbar */
+
+::-webkit-scrollbar{
+
+    width:10px;
+
+}
+
+::-webkit-scrollbar-track{
+
+    background:#080b16;
+
+}
+
+::-webkit-scrollbar-thumb{
+
+    background:#00d9ff;
+
+    border-radius:20px;
+
+}
+
+::-webkit-scrollbar-thumb:hover{
+
+    background:#00ffff;
+
+}
+
+/* Selection */
+
+::selection{
+
+    background:#00d9ff;
+
+    color:black;
+
+}
+
+/* Horizontal Line */
+
+hr{
+
+    border:1px solid rgba(255,255,255,.08);
+
+}
+
+/* Responsive */
+
+@media(max-width:992px){
+
+.hero-title{
+
+    font-size:48px;
+
+}
+
+.hero-image{
+
+    margin-left:0;
+
+    margin-top:40px;
+
+}
+
+.navbar-nav{
+
+    margin-top:20px;
+
+}
+
+}
+
+@media(max-width:768px){
+
+.hero-title{
+
+    font-size:36px;
+
+}
+
+.hero-subtitle{
+
+    font-size:17px;
+
+}
+
+.logo{
+
+    font-size:22px;
+
+}
+
+.dashboard-card{
+
+    margin-bottom:20px;
+
+}
+
+.card{
+
+    margin-bottom:20px;
+
+}
+
+.hero-section{
+
+    padding:60px 0;
+
+}
+
+}
+
+@media(max-width:576px){
+
+.main-content{
+
+    padding:20px;
+
+}
+
+.hero-title{
+
+    font-size:30px;
+
+}
+
+.btn-glow,
+.btn-outline-light{
+
+    width:100%;
+
+    margin-top:12px;
+
+}
+
+.user-box{
+
+    display:none;
+
+}
 
 }
