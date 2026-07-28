@@ -294,15 +294,10 @@ box-shadow:
 }
 
 .hero-image{
-
-width:100%;
-
-border-radius:25px;
-
-box-shadow:
-
-0 0 40px rgba(0,212,255,.4);
-
+    width:100%;
+    border-radius:25px;
+    box-shadow:0 0 40px rgba(0,212,255,.4);
+    margin-left:40px;
 }
 
 .feature-card{
