@@ -1,97 +1,472 @@
 {% extends "layout.html" %}
 
-{% block title %}Resume Builder{% endblock %}
+{% block title %}Professional Resume Builder{% endblock %}
 
 {% block content %}
 
 <div class="container py-5">
 
-<h1 class="text-center mb-5">
-Professional Resume Builder
+<div class="text-center mb-5">
+
+<h1 class="hero-title">
+
+Resume <span>Builder 2.0</span>
+
 </h1>
 
-<form method="POST" enctype="multipart/form-data">
+<p class="hero-subtitle">
+
+Create an ATS Friendly Professional Resume
+
+</p>
+
+</div>
+
+<div class="feature-card p-5">
+
+<form method="POST"
+
+enctype="multipart/form-data">
 
 <div class="row">
 
-<div class="col-md-6">
-
-<label class="form-label">Full Name</label>
-<input type="text" name="name" class="form-control">
-
-<label class="form-label mt-3">Email</label>
-<input type="email" name="email" class="form-control">
-
-<label class="form-label mt-3">Phone</label>
-<input type="text" name="phone" class="form-control">
-
-<label class="form-label mt-3">Education</label>
-<textarea class="form-control" name="education"></textarea>
-
-<label class="form-label mt-3">Skills</label>
-<textarea class="form-control" name="skills"></textarea>
-
-<label class="form-label mt-3">Projects</label>
-<textarea class="form-control" name="projects"></textarea>
-
-<label class="form-label mt-3">Experience</label>
-<textarea class="form-control" name="experience"></textarea>
-
-<label class="form-label mt-3">Certifications</label>
-<textarea class="form-control" name="certificates"></textarea>
-
-<label class="form-label mt-3">Languages</label>
-<input type="text" name="languages" class="form-control">
-
-</div>
-
-<div class="col-md-6">
+<div class="col-md-6 mb-4">
 
 <label class="form-label">
-Select Template
-</label>
 
-<select class="form-select" name="template">
-
-<option>Modern</option>
-
-<option>Professional</option>
-
-<option>Corporate</option>
-
-<option>Creative</option>
-
-<option>ATS Pro</option>
-
-</select>
-
-<label class="form-label mt-3">
-
-Profile Photo
+👤 Full Name
 
 </label>
 
-<input type="file"
+<input
+
+type="text"
+
+name="name"
 
 class="form-control"
 
-name="photo">
+value="{{ resume.name if resume else '' }}"
 
-<div class="mt-5">
+required>
 
-<button class="btn btn-glow w-100">
+</div>
 
-Generate Resume
+<div class="col-md-6 mb-4">
+
+<label class="form-label">
+
+📧 Email
+
+</label>
+
+<input
+
+type="email"
+
+name="email"
+
+class="form-control"
+
+value="{{ resume.email if resume else '' }}"
+
+required>
+
+</div>
+
+<div class="col-md-6 mb-4">
+
+<label class="form-label">
+
+📱 Mobile Number
+
+</label>
+
+<input
+
+type="text"
+
+name="phone"
+
+class="form-control"
+
+value="{{ resume.phone if resume else '' }}">
+
+</div>
+
+<div class="col-md-6 mb-4">
+
+<label class="form-label">
+
+🎨 Resume Template
+
+</label>
+
+<select
+
+name="template"
+
+class="form-select">
+
+<option value="modern">
+
+Modern Blue
+
+</option>
+
+<option value="professional">
+
+Professional Dark
+
+</option>
+
+<option value="creative">
+
+Creative Glass
+
+</option>
+
+<option value="minimal">
+
+Minimal White
+
+</option>
+
+<option value="executive">
+
+Executive Gold
+
+</option>
+
+</select>
+
+</div>
+
+<div class="col-12 mb-4">
+
+<label class="form-label">
+
+📝 Professional Summary
+
+</label>
+
+<textarea
+
+name="summary"
+
+rows="5"
+
+class="form-control">{{ resume.summary if resume else '' }}</textarea>
+
+</div>
+
+<div class="col-md-6 mb-4">
+
+<label class="form-label">
+
+🎓 Education
+
+</label>
+
+<textarea
+
+name="education"
+
+rows="5"
+
+class="form-control">{{ resume.education if resume else '' }}</textarea>
+
+</div>
+
+<div class="col-md-6 mb-4">
+
+<label class="form-label">
+
+🛠 Skills
+
+</label>
+
+<textarea
+
+name="skills"
+
+rows="5"
+
+class="form-control">{{ resume.skills if resume else '' }}</textarea>
+
+</div>
+<div class="col-md-6 mb-4">
+
+<label class="form-label">
+
+💼 Experience
+
+</label>
+
+<textarea
+
+name="experience"
+
+rows="5"
+
+class="form-control">{{ resume.experience if resume else '' }}</textarea>
+
+</div>
+
+<div class="col-md-6 mb-4">
+
+<label class="form-label">
+
+🚀 Projects
+
+</label>
+
+<textarea
+
+name="projects"
+
+rows="5"
+
+class="form-control">{{ resume.projects if resume else '' }}</textarea>
+
+</div>
+
+<div class="col-md-6 mb-4">
+
+<label class="form-label">
+
+🏆 Certifications
+
+</label>
+
+<textarea
+
+name="certifications"
+
+rows="5"
+
+class="form-control">{{ resume.certifications if resume else '' }}</textarea>
+
+</div>
+
+<div class="col-md-6 mb-4">
+
+<label class="form-label">
+
+🌍 Languages
+
+</label>
+
+<input
+
+type="text"
+
+name="languages"
+
+class="form-control"
+
+placeholder="English, Hindi, Marathi"
+
+value="{{ resume.languages if resume else '' }}">
+
+</div>
+
+<div class="col-md-6 mb-4">
+
+<label class="form-label">
+
+💻 GitHub Profile
+
+</label>
+
+<input
+
+type="url"
+
+name="github"
+
+class="form-control"
+
+placeholder="https://github.com/username"
+
+value="{{ resume.github if resume else '' }}">
+
+</div>
+
+<div class="col-md-6 mb-4">
+
+<label class="form-label">
+
+💼 LinkedIn Profile
+
+</label>
+
+<input
+
+type="url"
+
+name="linkedin"
+
+class="form-control"
+
+placeholder="https://linkedin.com/in/username"
+
+value="{{ resume.linkedin if resume else '' }}">
+
+</div>
+
+<div class="col-md-6 mb-4">
+
+<label class="form-label">
+
+📸 Profile Photo
+
+</label>
+
+<input
+
+type="file"
+
+name="photo"
+
+class="form-control"
+
+accept="image/*">
+
+</div>
+
+<div class="col-md-6 mb-4 text-center">
+
+{% if resume and resume.photo %}
+
+<img
+
+src="{{ url_for('static', filename='uploads/' + resume.photo) }}"
+
+class="profile-img mt-3">
+
+{% else %}
+
+<div class="feature-card p-4 mt-3">
+
+No Photo Selected
+
+</div>
+
+{% endif %}
+
+</div>
+<div class="text-center mt-5">
+
+<button
+type="submit"
+class="btn btn-glow btn-lg me-3">
+
+💾 Save Resume
 
 </button>
 
-</div>
+<a
+href="/resume/download"
+class="btn btn-success btn-lg me-3">
+
+📄 Download PDF
+
+</a>
+
+<a
+href="/resume/scan"
+class="btn btn-warning btn-lg">
+
+🤖 ATS Resume Scan
+
+</a>
 
 </div>
 
 </div>
 
 </form>
+
+</div>
+
+<div class="container mt-5">
+
+<div class="feature-card p-5">
+
+<h2 class="text-center text-info">
+
+👀 Resume Preview
+
+</h2>
+
+<hr>
+
+{% if resume %}
+
+<h3>{{ resume.name }}</h3>
+
+<p>
+
+📧 {{ resume.email }}
+
+|
+
+📱 {{ resume.phone }}
+
+</p>
+
+<hr>
+
+<h4>Professional Summary</h4>
+
+<p>{{ resume.summary }}</p>
+
+<h4>Education</h4>
+
+<p>{{ resume.education }}</p>
+
+<h4>Skills</h4>
+
+<p>{{ resume.skills }}</p>
+
+<h4>Projects</h4>
+
+<p>{{ resume.projects }}</p>
+
+<h4>Experience</h4>
+
+<p>{{ resume.experience }}</p>
+
+<h4>Certifications</h4>
+
+<p>{{ resume.certifications }}</p>
+
+<h4>Languages</h4>
+
+<p>{{ resume.languages }}</p>
+
+<h4>GitHub</h4>
+
+<p>{{ resume.github }}</p>
+
+<h4>LinkedIn</h4>
+
+<p>{{ resume.linkedin }}</p>
+
+{% else %}
+
+<div class="alert alert-info text-center">
+
+Resume Preview will appear here after saving.
+
+</div>
+
+{% endif %}
+
+</div>
+
+</div>
 
 </div>
 

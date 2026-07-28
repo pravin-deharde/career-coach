@@ -52,6 +52,14 @@ class Resume(db.Model):
         nullable=False
     )
 
+    name = db.Column(db.String(100))
+
+    email = db.Column(db.String(100))
+
+    phone = db.Column(db.String(20))
+
+    summary = db.Column(db.Text)
+
     education = db.Column(db.Text)
 
     skills = db.Column(db.Text)
@@ -59,31 +67,23 @@ class Resume(db.Model):
     projects = db.Column(db.Text)
 
     experience = db.Column(db.Text)
-    name = db.Column(db.String(100))
 
-email = db.Column(db.String(100))
+    certifications = db.Column(db.Text)
 
-phone = db.Column(db.String(20))
+    languages = db.Column(db.Text)
 
-summary = db.Column(db.Text)
+    github = db.Column(db.String(200))
 
-certifications = db.Column(db.Text)
+    linkedin = db.Column(db.String(200))
 
-languages = db.Column(db.Text)
+    template = db.Column(db.String(50))
 
-github = db.Column(db.String(200))
+    photo = db.Column(db.String(200))
 
-linkedin = db.Column(db.String(200))
-
-template = db.Column(db.String(50))
-
-photo = db.Column(db.String(200))
-
-created_at = db.Column(
+    created_at = db.Column(
         db.DateTime,
         server_default=db.func.now()
     )
-
 class JobApplication(db.Model):
 
     __tablename__ = "job_applications"

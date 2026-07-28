@@ -1,0 +1,87 @@
+{% extends "layout.html" %}
+
+{% block title %}ATS Resume Scan{% endblock %}
+
+{% block content %}
+
+<div class="container py-5">
+
+<div class="feature-card p-5">
+
+<h1 class="text-center text-info">
+
+🤖 AI Resume Scanner
+
+</h1>
+
+<hr>
+
+<h2 class="text-center">
+
+ATS Score
+
+</h2>
+
+<h1 class="display-1 text-center text-success">
+
+{{ score }}%
+
+</h1>
+
+<hr>
+
+<h3 class="text-warning">
+
+Suggestions
+
+</h3>
+
+<ul>
+
+{% for item in suggestions %}
+
+<li>{{ item }}</li>
+
+{% endfor %}
+
+</ul>
+
+{% if score >= 85 %}
+
+<div class="alert alert-success">
+
+Excellent Resume ✅
+
+</div>
+
+{% elif score >= 70 %}
+
+<div class="alert alert-info">
+
+Good Resume 👍
+
+</div>
+
+{% else %}
+
+<div class="alert alert-danger">
+
+Needs Improvement ⚠️
+
+</div>
+
+{% endif %}
+
+<a href="/resume"
+
+class="btn btn-glow mt-4">
+
+Back to Resume
+
+</a>
+
+</div>
+
+</div>
+
+{% endblock %}

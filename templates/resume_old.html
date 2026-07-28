@@ -1,0 +1,98 @@
+{% extends "layout.html" %}
+
+{% block title %}Resume Builder{% endblock %}
+
+{% block content %}
+
+<div class="container py-5">
+
+<h1 class="text-center mb-5">
+Professional Resume Builder
+</h1>
+
+<form method="POST" enctype="multipart/form-data">
+
+<div class="row">
+
+<div class="col-md-6">
+
+<label class="form-label">Full Name</label>
+<input type="text" name="name" class="form-control">
+
+<label class="form-label mt-3">Email</label>
+<input type="email" name="email" class="form-control">
+
+<label class="form-label mt-3">Phone</label>
+<input type="text" name="phone" class="form-control">
+
+<label class="form-label mt-3">Education</label>
+<textarea class="form-control" name="education"></textarea>
+
+<label class="form-label mt-3">Skills</label>
+<textarea class="form-control" name="skills"></textarea>
+
+<label class="form-label mt-3">Projects</label>
+<textarea class="form-control" name="projects"></textarea>
+
+<label class="form-label mt-3">Experience</label>
+<textarea class="form-control" name="experience"></textarea>
+
+<label class="form-label mt-3">Certifications</label>
+<textarea class="form-control" name="certificates"></textarea>
+
+<label class="form-label mt-3">Languages</label>
+<input type="text" name="languages" class="form-control">
+
+</div>
+
+<div class="col-md-6">
+
+<label class="form-label">
+Select Template
+</label>
+
+<select class="form-select" name="template">
+
+<option>Modern</option>
+
+<option>Professional</option>
+
+<option>Corporate</option>
+
+<option>Creative</option>
+
+<option>ATS Pro</option>
+
+</select>
+
+<label class="form-label mt-3">
+
+Profile Photo
+
+</label>
+
+<input type="file"
+
+class="form-control"
+
+name="photo">
+
+<div class="mt-5">
+
+<button class="btn btn-glow w-100">
+
+Generate Resume
+
+</button>
+
+</div>
+
+</div>
+
+</div>
+
+</form>
+
+</div>
+
+{% endblock %}

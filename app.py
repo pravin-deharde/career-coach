@@ -377,17 +377,93 @@ def download_resume():
 
     story = []
 
-    story.append(Paragraph("<b>Career Coach Resume</b>", styles["Title"]))
+    story.append(
+        Paragraph("<b><font size=20>Professional Resume</font></b>", styles["Title"])
+    )
 
-    story.append(Paragraph(f"<b>Name:</b> {session['user_name']}", styles["Normal"]))
+    story.append(
+        Paragraph(f"<b>Name:</b> {resume.name}", styles["Heading2"])
+    )
 
-    story.append(Paragraph(f"<b>Education:</b> {resume.education}", styles["Normal"]))
+    story.append(
+        Paragraph(f"<b>Email:</b> {resume.email}", styles["Normal"])
+    )
 
-    story.append(Paragraph(f"<b>Skills:</b> {resume.skills}", styles["Normal"]))
+    story.append(
+        Paragraph(f"<b>Phone:</b> {resume.phone}", styles["Normal"])
+    )
 
-    story.append(Paragraph(f"<b>Projects:</b> {resume.projects}", styles["Normal"]))
+    story.append(
+        Paragraph("<br/><b>Professional Summary</b>", styles["Heading2"])
+    )
 
-    story.append(Paragraph(f"<b>Experience:</b> {resume.experience}", styles["Normal"]))
+    story.append(
+        Paragraph(resume.summary or "-", styles["Normal"])
+    )
+
+    story.append(
+        Paragraph("<br/><b>Education</b>", styles["Heading2"])
+    )
+
+    story.append(
+        Paragraph(resume.education or "-", styles["Normal"])
+    )
+
+    story.append(
+        Paragraph("<br/><b>Skills</b>", styles["Heading2"])
+    )
+
+    story.append(
+        Paragraph(resume.skills or "-", styles["Normal"])
+    )
+
+    story.append(
+        Paragraph("<br/><b>Projects</b>", styles["Heading2"])
+    )
+
+    story.append(
+        Paragraph(resume.projects or "-", styles["Normal"])
+    )
+
+    story.append(
+        Paragraph("<br/><b>Experience</b>", styles["Heading2"])
+    )
+
+    story.append(
+        Paragraph(resume.experience or "-", styles["Normal"])
+    )
+
+    story.append(
+        Paragraph("<br/><b>Certifications</b>", styles["Heading2"])
+    )
+
+    story.append(
+        Paragraph(resume.certifications or "-", styles["Normal"])
+    )
+
+    story.append(
+        Paragraph("<br/><b>Languages</b>", styles["Heading2"])
+    )
+
+    story.append(
+        Paragraph(resume.languages or "-", styles["Normal"])
+    )
+
+    story.append(
+        Paragraph("<br/><b>GitHub</b>", styles["Heading2"])
+    )
+
+    story.append(
+        Paragraph(resume.github or "-", styles["Normal"])
+    )
+
+    story.append(
+        Paragraph("<br/><b>LinkedIn</b>", styles["Heading2"])
+    )
+
+    story.append(
+        Paragraph(resume.linkedin or "-", styles["Normal"])
+    )
 
     doc.build(story)
 
@@ -396,10 +472,72 @@ def download_resume():
     return send_file(
         buffer,
         as_attachment=True,
-        download_name="Resume.pdf",
+        download_name="Professional_Resume.pdf",
         mimetype="application/pdf"
     )
 
+@app.route("/resume/scan")
+def resume_scan():
+
+    if "user_id" not in session:
+        return redirect(url_for("login"))
+
+    resume = Resume.query.filter_by(
+        user_id=session["user_id"]
+    ).first()
+
+    if not resume:
+        flash("Please create your resume first.")
+        return redirect(url_for("resume"))
+
+    score = 40
+    suggestions = []
+
+    if resume.summary:
+        score += 10
+    else:
+        suggestions.append("Add Professional Summary")
+
+    if resume.skills:
+        score += 10
+    else:
+        suggestions.append("Add Skills")
+
+    if resume.projects:
+        score += 10
+    else:
+        suggestions.append("Add Projects")
+
+    if resume.experience:
+        score += 10
+    else:
+        suggestions.append("Add Experience")
+
+    if resume.github:
+        score += 5
+    else:
+        suggestions.append("Add GitHub Profile")
+
+    if resume.linkedin:
+        score += 5
+    else:
+        suggestions.append("Add LinkedIn Profile")
+
+    if resume.certifications:
+        score += 5
+    else:
+        suggestions.append("Add Certifications")
+
+    if resume.languages:
+        score += 5
+    else:
+        suggestions.append("Add Languages")
+
+    return render_template(
+        "resume_scan.html",
+        score=score,
+        suggestions=suggestions
+    )
 @app.route("/edit-profile", methods=["GET", "POST"])
 def edit_profile():
 
