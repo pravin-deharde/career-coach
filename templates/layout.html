@@ -66,11 +66,7 @@
                     </a>
                 </li>
 
-                <li class="nav-item">
-                    <a class="nav-link" href="/roadmap">
-                        <i class="fa-solid fa-road"></i> Roadmap
-                    </a>
-                </li>
+                
                 <li class="nav-item">
     <a class="nav-link" href="/ai-career">
         AI Career
@@ -83,7 +79,11 @@
     </a>
 
     <ul class="dropdown-menu">
-        <li><a class="dropdown-item" href="/resume-builder">Resume Builder</a></li>
+        <li>
+    <a class="dropdown-item" href="{{ url_for('resume') }}">
+        Resume Builder
+    </a>
+</li>
         <li><a class="dropdown-item" href="/ai-resume">AI Resume Scanner</a></li>
         <li><a class="dropdown-item" href="/resume-analysis">Resume Analysis</a></li>
         <li><a class="dropdown-item" href="/resume-preview">Resume Preview</a></li>
@@ -101,17 +101,14 @@
                         <i class="fa-solid fa-user"></i> Profile
                     </a>
                 </li>
-
-                <li class="nav-item ms-3">
-
-                    <span class="user-box">
-
-                        👋 {{ session.get("user_name") }}
-
-                    </span>
-
-                </li>
-
+{% if session.get("role") == "admin" %}
+<li class="nav-item">
+    <a class="nav-link text-warning fw-bold"
+       href="{{ url_for('admin_dashboard') }}">
+        🛠 Admin Panel
+    </a>
+</li>
+{% endif %}
                 <li class="nav-item ms-3">
 
                     <a class="btn btn-danger btn-sm rounded-pill px-3"

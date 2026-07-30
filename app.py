@@ -1,3 +1,13 @@
+from flask import (
+    render_template,
+    request,
+    redirect,
+    flash
+)
+from roadmap_data import roadmaps
+from database import db
+from database.models import Job
+import re
 from data.career_data import career_data
 from data.roadmap_data import roadmaps
 from flask import Flask, render_template, request, redirect, url_for, session, flash
@@ -182,14 +192,15 @@ def career_category(category):
         category=category
 
     )
-@app.route("/career/details/<title>")
+@app.route("/career/details/<path:title>")
 def career_details(title):
 
-    print("Title =", repr(title))
+    print("URL se aaya title:", repr(title))
+    print("career_data keys:", list(career_data.keys()))
 
     for category in career_data.values():
+
         for course in category:
-            print(course["title"])
             if course["title"] == title:
                 return render_template(
                     "career_details.html",
@@ -197,27 +208,33 @@ def career_details(title):
                 )
 
     return "Course Not Found"
-
 # -----------------------------
 # ROADMAP
 # -----------------------------
 
-@app.route("/roadmap/<course_name>")
+from roadmap_data import roadmaps
+
+@app.route("/roadmap/<path:course_name>")
 def roadmap(course_name):
 
     if "user_id" not in session:
         return redirect(url_for("login"))
-    print("Course Name:", repr(course_name))
+
+    course_name = course_name.strip()
+
+    print("Requested Course:", repr(course_name))
+
     roadmap = roadmaps.get(course_name)
 
     if roadmap is None:
-        flash("Roadmap not available.")
+        print("Available Keys:", list(roadmaps.keys()))
+        flash(f"Roadmap not found for {course_name}")
         return redirect(url_for("career"))
 
     return render_template(
         "roadmap_details.html",
-        roadmap=roadmap,
-        course_name=course_name
+        course_name=course_name,
+        roadmap=roadmap
     )
 # -----------------------------
 # JOBS
@@ -306,6 +323,163 @@ def resume():
         "resume.html",
         resume=resume
     )
+@app.route("/resume/analyze", methods=["POST"])
+def analyze_resume():
+
+    if "user_id" not in session:
+        return redirect("/login")
+
+    resume = Resume.query.filter_by(user_id=session["user_id"]).first()
+
+    if not resume:
+        flash("Resume not found")
+        return redirect("/resume")
+
+    score = 0
+    suggestions = []
+
+    if resume.summary and len(resume.summary) > 30:
+        score += 10
+    else:
+        suggestions.append("Add Professional Summary")
+
+    if resume.education:
+        score += 10
+    else:
+        suggestions.append("Add Education")
+
+    if resume.skills:
+        score += 15
+    else:
+        suggestions.append("Add Skills")
+
+    if resume.projects:
+        score += 20
+    else:
+        suggestions.append("Add Projects")
+
+    if resume.experience:
+        score += 15
+    else:
+        suggestions.append("Add Experience")
+
+    if resume.github:
+        score += 10
+    else:
+        suggestions.append("Add GitHub Profile")
+
+    if resume.linkedin:
+        score += 10
+    else:
+        suggestions.append("Add LinkedIn Profile")
+
+    if resume.certifications:
+        score += 10
+    else:
+        suggestions.append("Add Certifications")
+
+    if score >= 90:
+        level = "Excellent"
+    elif score >= 75:
+        level = "Good"
+    elif score >= 60:
+        level = "Average"
+    else:
+        level = "Needs Improvement"
+
+    ats_score = score
+
+    missing_skills = []
+
+    required = [
+        "Python",
+        "SQL",
+        "Git",
+        "HTML",
+        "CSS",
+        "JavaScript"
+    ]
+
+    resume_skills = ""
+
+    if resume.skills:
+        resume_skills = resume.skills.lower()
+
+    for skill in required:
+
+        if skill.lower() not in resume_skills:
+
+            missing_skills.append(skill)
+
+    return render_template(
+    "resume_analysis.html",
+    score=score,
+    ats_score=ats_score,
+    level=level,
+    suggestions=suggestions,
+    missing_skills=missing_skills
+)
+@app.route("/interview")
+def interview():
+
+    questions = [
+        {
+            "question": "What is Python?",
+            "options": [
+                "Programming Language",
+                "Database",
+                "Operating System",
+                "Compiler"
+            ],
+            "answer": "Programming Language"
+        },
+        {
+            "question": "Which keyword is used to define a function in Python?",
+            "options": [
+                "func",
+                "define",
+                "def",
+                "function"
+            ],
+            "answer": "def"
+        },
+        {
+            "question": "HTML stands for?",
+            "options": [
+                "Hyper Text Markup Language",
+                "High Text Machine Language",
+                "Home Tool Markup Language",
+                "Hyper Tool Multi Language"
+            ],
+            "answer": "Hyper Text Markup Language"
+        },
+        {
+            "question": "CSS is used for?",
+            "options": [
+                "Styling",
+                "Programming",
+                "Database",
+                "Networking"
+            ],
+            "answer": "Styling"
+        },
+        {
+            "question": "Which SQL command is used to fetch data?",
+            "options": [
+                "SELECT",
+                "INSERT",
+                "DELETE",
+                "UPDATE"
+            ],
+            "answer": "SELECT"
+        }
+    ]
+
+    return render_template(
+        "interview.html",
+        questions=questions
+    )
+
 @app.route("/apply/<int:job_id>")
 def apply_job(job_id):
 
@@ -815,88 +989,131 @@ def ai_career():
         career=career,
         reason=reason
     )
-@app.route("/ai-resume", methods=["GET","POST"])
+from flask import request, render_template
+import os
+
+@app.route("/ai-resume", methods=["GET", "POST"])
 def ai_resume():
 
-    score = None
-
-    missing = []
-
-    suggestions = []
-
-    keywords = [
-
-        "python",
-
-        "sql",
-
-        "git",
-
-        "github",
-
-        "flask",
-
-        "html",
-
-        "css",
-
-        "javascript",
-
-        "aws",
-
-        "docker"
-
-    ]
+    result = None
 
     if request.method == "POST":
 
-        resume = request.form["resume"].lower()
+        if "resume" not in request.files:
+            return render_template(
+                "ai_resume.html",
+                result="❌ No resume file uploaded."
+            )
 
-        found = 0
+        file = request.files.get("resume")
 
-        for skill in keywords:
+        if file.filename == "":
+            return render_template(
+                "ai_resume.html",
+                result="❌ Please select a file."
+            )
 
-            if skill in resume:
+        upload_folder = "static/uploads"
+        os.makedirs(upload_folder, exist_ok=True)
 
-                found += 1
+        filepath = os.path.join(upload_folder, file.filename)
+        file.save(filepath)
 
-            else:
-
-                missing.append(skill.upper())
-
-        score = int(found / len(keywords) * 100)
-
-        if score < 40:
-
-            suggestions.append("Resume needs major improvements.")
-
-        elif score < 70:
-
-            suggestions.append("Add more technical skills.")
-
-        else:
-
-            suggestions.append("Excellent ATS Resume.")
-
-        suggestions.append("Add GitHub Profile")
-
-        suggestions.append("Add LinkedIn Profile")
-
-        suggestions.append("Add 2 Projects")
-
-        suggestions.append("Use Action Verbs")
+        # Abhi testing ke liye
+        result = f"✅ Resume uploaded successfully: {file.filename}"
 
     return render_template(
-
         "ai_resume.html",
-
-        score=score,
-
-        missing=missing,
-
-        suggestions=suggestions
-
+        result=result
     )
+@app.route("/recommended_jobs")
+def recommended_jobs():
+
+    jobs = [
+
+        {
+            "title": "Python Developer",
+            "company": "TCS",
+            "location": "Pune",
+            "salary": "₹5-8 LPA",
+            "skills": "Python, Flask, SQL"
+        },
+
+        {
+            "title": "Full Stack Developer",
+            "company": "Infosys",
+            "location": "Bangalore",
+            "salary": "₹6-10 LPA",
+            "skills": "HTML, CSS, JavaScript, Flask"
+        },
+
+        {
+            "title": "Data Analyst",
+            "company": "Accenture",
+            "location": "Mumbai",
+            "salary": "₹5-9 LPA",
+            "skills": "Python, SQL, Excel"
+        },
+
+        {
+            "title": "AI Engineer",
+            "company": "Google",
+            "location": "Hyderabad",
+            "salary": "₹15-30 LPA",
+            "skills": "Python, Machine Learning"
+        }
+
+    ]
+
+    return render_template(
+        "recommended_jobs.html",
+        jobs=jobs
+    )
+@app.route("/analytics")
+def analytics():
+
+    data = {
+        "resume_score": 85,
+        "interview_score": 78,
+        "jobs_applied": 6,
+        "roadmaps_completed": 3,
+        "courses_explored": 12
+    }
+
+    return render_template(
+        "analytics.html",
+        data=data
+    )
+@app.route("/admin")
+def admin():
+
+    jobs = Job.query.all()
+
+    return render_template(
+        "admin.html",
+        jobs=jobs
+    )
+@app.route("/admin/add_job", methods=["GET", "POST"])
+def add_job():
+
+    if request.method == "POST":
+
+        job = Job(
+            title=request.form["title"],
+            company=request.form["company"],
+            location=request.form["location"],
+            salary=request.form["salary"],
+            description=request.form["description"]
+        )
+
+        db.session.add(job)
+        db.session.commit()
+
+        flash("Job Added Successfully!", "success")
+
+        return redirect("/admin")
+
+    return render_template("add_job.html")
 # -----------------------------
 # MAIN
 # -----------------------------
