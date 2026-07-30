@@ -1,106 +1,118 @@
 {% extends "layout.html" %}
 
-{% block title %}AI Resume Scanner{% endblock %}
-
 {% block content %}
 
-<div class="container py-5">
+<div class="container mt-5">
 
-<div class="feature-card p-5">
+    <div class="card shadow-lg p-4">
 
-<h1 class="text-center mb-5">
+        <h2 class="text-center mb-4">
+            🤖 AI Career Recommendation
+        </h2>
 
-🤖 AI Resume Scanner
+        <form method="POST">
 
-</h1>
+            <div class="mb-3">
+                <label>Name</label>
+                <input type="text" class="form-control" name="name" required>
+            </div>
 
-<form method="POST">
+            <div class="mb-3">
+                <label>Qualification</label>
+                <select class="form-control" name="qualification">
+                    <option>10th</option>
+                    <option>12th Science</option>
+                    <option>12th Commerce</option>
+                    <option>12th Arts</option>
+                    <option>BCA</option>
+                    <option>BSc</option>
+                    <option>BTech</option>
+                    <option>BBA</option>
+                    <option>MCA</option>
+                </select>
+            </div>
 
-<label class="form-label">
+            <div class="mb-3">
+                <label>Favourite Subject</label>
+                <input type="text" class="form-control" name="subject">
+            </div>
 
-Paste Resume Skills
+            <div class="mb-4">
+                <label class="mb-3"><b>Select Your Interest</b></label>
 
-</label>
+                <div class="row g-2">
 
-<textarea
+                    <div class="col-md-4">
+                        <input type="radio" class="btn-check" name="interest" id="programming" value="Programming" checked>
+                        <label class="btn btn-outline-info w-100" for="programming">💻 Programming</label>
+                    </div>
 
-class="form-control"
+                    <div class="col-md-4">
+                        <input type="radio" class="btn-check" name="interest" id="web" value="Web Development">
+                        <label class="btn btn-outline-info w-100" for="web">🌐 Web Development</label>
+                    </div>
 
-rows="10"
+                    <div class="col-md-4">
+                        <input type="radio" class="btn-check" name="interest" id="ai" value="Artificial Intelligence">
+                        <label class="btn btn-outline-info w-100" for="ai">🤖 Artificial Intelligence</label>
+                    </div>
 
-name="resume">
+                    <div class="col-md-4">
+                        <input type="radio" class="btn-check" name="interest" id="data" value="Data Science">
+                        <label class="btn btn-outline-info w-100" for="data">📊 Data Science</label>
+                    </div>
 
-</textarea>
+                    <div class="col-md-4">
+                        <input type="radio" class="btn-check" name="interest" id="cyber" value="Cyber Security">
+                        <label class="btn btn-outline-info w-100" for="cyber">🔐 Cyber Security</label>
+                    </div>
 
-<button
+                    <div class="col-md-4">
+                        <input type="radio" class="btn-check" name="interest" id="business" value="Business">
+                        <label class="btn btn-outline-info w-100" for="business">💼 Business</label>
+                    </div>
 
-class="btn btn-glow mt-4 w-100">
+                    <div class="col-md-4">
+                        <input type="radio" class="btn-check" name="interest" id="medical" value="Medical">
+                        <label class="btn btn-outline-info w-100" for="medical">🩺 Medical</label>
+                    </div>
 
-Scan Resume
+                    <div class="col-md-4">
+                        <input type="radio" class="btn-check" name="interest" id="design" value="Design">
+                        <label class="btn btn-outline-info w-100" for="design">🎨 Design</label>
+                    </div>
 
-</button>
+                    <div class="col-md-4">
+                        <input type="radio" class="btn-check" name="interest" id="gov" value="Government Jobs">
+                        <label class="btn btn-outline-info w-100" for="gov">🏛 Government Jobs</label>
+                    </div>
 
-</form>
+                </div>
+            </div>
 
-{% if score %}
+            <button class="btn btn-primary w-100">
+                🚀 Get AI Career Suggestion
+            </button>
 
-<hr>
+        </form>
 
-<h2>
+        {% if career %}
 
-ATS SCORE
+        <hr>
 
-</h2>
+        <div class="alert alert-success mt-4">
 
-<div class="progress">
+            <h3>🎯 Recommended Career</h3>
 
-<div
+            <h4>{{ career }}</h4>
 
-class="progress-bar bg-success"
+            <p>{{ reason }}</p>
 
-style="width:{{score}}%">
+        </div>
 
-{{score}}%
+        {% endif %}
 
-</div>
-
-</div>
-
-<h3 class="mt-4">
-
-Missing Skills
-
-</h3>
-
-<ul>
-
-{% for item in missing %}
-
-<li>{{item}}</li>
-
-{% endfor %}
-
-</ul>
-
-<h3>
-
-Suggestions
-
-</h3>
-
-<ul>
-
-{% for item in suggestions %}
-
-<li>{{item}}</li>
-
-{% endfor %}
-
-</ul>
-
-{% endif %}
-
-</div>
+    </div>
 
 </div>
 

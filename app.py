@@ -185,11 +185,11 @@ def career_category(category):
 @app.route("/career/details/<title>")
 def career_details(title):
 
-    print("URL se aaya title:", repr(title))
-    print("career_data keys:", list(career_data.keys()))
+    print("Title =", repr(title))
 
     for category in career_data.values():
         for course in category:
+            print(course["title"])
             if course["title"] == title:
                 return render_template(
                     "career_details.html",
@@ -197,6 +197,7 @@ def career_details(title):
                 )
 
     return "Course Not Found"
+
 # -----------------------------
 # ROADMAP
 # -----------------------------
@@ -775,53 +776,44 @@ def page_not_found(error):
 def internal_server_error(error):
     return render_template("500.html"), 500
 
-@app.route("/ai-career", methods=["GET","POST"])
+@app.route("/ai-career", methods=["GET", "POST"])
 def ai_career():
 
-    result = None
+    career = None
+    reason = None
 
     if request.method == "POST":
 
-        subject = request.form["subject"]
-
-        interest = request.form["interest"]
-
-        communication = request.form["communication"]
+        interest = request.form.get("interest")
 
         if interest == "Programming":
-
-            result = "Software Engineer / AI Engineer"
-
-        elif interest == "Medical":
-
-            result = "Doctor / Pharmacist"
+            career = "Software Engineer"
+            reason = "Programming me interest hai. Python, Java aur Web Development seekho."
 
         elif interest == "Business":
+            career = "Business Analyst"
+            reason = "Management aur Business tumhare liye best rahega."
 
-            result = "CA / MBA / Entrepreneur"
+        elif interest == "Medical":
+            career = "Doctor"
+            reason = "Medical field me achha scope hai."
 
-        elif interest == "Government Job":
+        elif interest == "Design":
+            career = "UI/UX Designer"
+            reason = "Creative field tumhare liye best hai."
 
-            result = "UPSC / MPSC / SSC"
-
-        elif interest == "Teaching":
-
-            result = "Professor / Lecturer"
-
-        elif interest == "Research":
-
-            result = "Scientist"
+        elif interest == "Government Jobs":
+            career = "UPSC / MPSC Officer"
+            reason = "Government Exams ki preparation start karo."
 
         else:
-
-            result = "Choose a suitable career."
+            career = "Career Counsellor Required"
+            reason = "Please explore multiple career options."
 
     return render_template(
-
         "ai_career.html",
-
-        result=result
-
+        career=career,
+        reason=reason
     )
 @app.route("/ai-resume", methods=["GET","POST"])
 def ai_resume():

@@ -76,16 +76,20 @@
         AI Career
     </a>
 </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="/resume">
-                        <i class="fa-solid fa-file"></i> Resume
-                    </a>
-                </li>
-                <li class="nav-item">
-    <a class="nav-link" href="/ai-resume">
-        AI Resume
+                <li class="nav-item dropdown">
+    <a class="nav-link dropdown-toggle" href="#" id="resumeDropdown"
+       role="button" data-bs-toggle="dropdown">
+        <i class="fas fa-file-alt"></i> Resume
     </a>
+
+    <ul class="dropdown-menu">
+        <li><a class="dropdown-item" href="/resume-builder">Resume Builder</a></li>
+        <li><a class="dropdown-item" href="/ai-resume">AI Resume Scanner</a></li>
+        <li><a class="dropdown-item" href="/resume-analysis">Resume Analysis</a></li>
+        <li><a class="dropdown-item" href="/resume-preview">Resume Preview</a></li>
+    </ul>
 </li>
+                
                 <li class="nav-item">
                     <a class="nav-link" href="/jobs">
                         <i class="fa-solid fa-briefcase"></i> Jobs
