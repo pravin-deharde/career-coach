@@ -4,6 +4,16 @@ from flask import (
     redirect,
     flash
 )
+from reportlab.lib import colors
+from reportlab.lib.enums import TA_CENTER
+from reportlab.lib.styles import getSampleStyleSheet, ParagraphStyle
+from reportlab.platypus import (
+    SimpleDocTemplate,
+    Paragraph,
+    Spacer,
+    Table,
+    TableStyle,
+)
 from roadmap_data import roadmaps
 from database import db
 from database.models import Job
@@ -323,7 +333,7 @@ def resume():
         "resume.html",
         resume=resume
     )
-@app.route("/resume/analyze", methods=["POST"])
+@app.route("/resume/analyze", methods=["GET","POST"])
 def analyze_resume():
 
     if "user_id" not in session:
@@ -543,98 +553,99 @@ def download_resume():
 
     buffer = BytesIO()
 
-    doc = SimpleDocTemplate(buffer)
+    doc = SimpleDocTemplate(
+        buffer,
+        rightMargin=30,
+        leftMargin=30,
+        topMargin=30,
+        bottomMargin=30
+    )
 
     styles = getSampleStyleSheet()
+
+    title_style = ParagraphStyle(
+        "TitleStyle",
+        parent=styles["Heading1"],
+        fontSize=24,
+        alignment=TA_CENTER,
+        textColor=colors.HexColor("#1565C0"),
+        spaceAfter=20,
+    )
+
+    heading_style = ParagraphStyle(
+        "HeadingStyle",
+        parent=styles["Heading2"],
+        fontSize=14,
+        textColor=colors.white,
+        backColor=colors.HexColor("#1565C0"),
+        leftIndent=5,
+        spaceBefore=10,
+        spaceAfter=8,
+    )
+
+    normal_style = ParagraphStyle(
+        "NormalStyle",
+        parent=styles["BodyText"],
+        fontSize=11,
+        leading=18,
+        spaceAfter=6,
+    )
 
     story = []
 
     story.append(
-        Paragraph("<b><font size=20>Professional Resume</font></b>", styles["Title"])
+        Paragraph("Professional Resume", title_style)
     )
 
-    story.append(
-        Paragraph(f"<b>Name:</b> {resume.name}", styles["Heading2"])
-    )
+    info = [
+        ["👤 Name", resume.name or "-"],
+        ["📧 Email", resume.email or "-"],
+        ["📱 Phone", resume.phone or "-"],
+        ["🌐 GitHub", resume.github or "-"],
+        ["💼 LinkedIn", resume.linkedin or "-"],
+    ]
+
+    table = Table(info, colWidths=[120, 330])
+
+    table.setStyle(TableStyle([
+        ("GRID", (0,0), (-1,-1), 0.5, colors.grey),
+        ("BACKGROUND", (0,0), (0,-1), colors.HexColor("#1565C0")),
+        ("TEXTCOLOR", (0,0), (0,-1), colors.white),
+        ("BACKGROUND", (1,0), (1,-1), colors.whitesmoke),
+        ("BOTTOMPADDING", (0,0), (-1,-1), 8),
+        ("TOPPADDING", (0,0), (-1,-1), 8),
+    ]))
+
+    story.append(table)
+    story.append(Spacer(1,15))
+
+    story.append(Paragraph("Professional Summary", heading_style))
+    story.append(Paragraph(resume.summary or "-", normal_style))
+
+    story.append(Paragraph("Education", heading_style))
+    story.append(Paragraph(resume.education or "-", normal_style))
+
+    story.append(Paragraph("Skills", heading_style))
+    story.append(Paragraph(resume.skills or "-", normal_style))
+
+    story.append(Paragraph("Projects", heading_style))
+    story.append(Paragraph(resume.projects or "-", normal_style))
+    story.append(Paragraph("Experience", heading_style))
+    story.append(Paragraph(resume.experience or "-", normal_style))
+
+    story.append(Paragraph("Certifications", heading_style))
+    story.append(Paragraph(resume.certifications or "-", normal_style))
+
+    story.append(Paragraph("Languages", heading_style))
+    story.append(Paragraph(resume.languages or "-", normal_style))
+
+    story.append(Spacer(1, 20))
 
     story.append(
-        Paragraph(f"<b>Email:</b> {resume.email}", styles["Normal"])
-    )
-
-    story.append(
-        Paragraph(f"<b>Phone:</b> {resume.phone}", styles["Normal"])
-    )
-
-    story.append(
-        Paragraph("<br/><b>Professional Summary</b>", styles["Heading2"])
-    )
-
-    story.append(
-        Paragraph(resume.summary or "-", styles["Normal"])
-    )
-
-    story.append(
-        Paragraph("<br/><b>Education</b>", styles["Heading2"])
-    )
-
-    story.append(
-        Paragraph(resume.education or "-", styles["Normal"])
-    )
-
-    story.append(
-        Paragraph("<br/><b>Skills</b>", styles["Heading2"])
-    )
-
-    story.append(
-        Paragraph(resume.skills or "-", styles["Normal"])
-    )
-
-    story.append(
-        Paragraph("<br/><b>Projects</b>", styles["Heading2"])
-    )
-
-    story.append(
-        Paragraph(resume.projects or "-", styles["Normal"])
-    )
-
-    story.append(
-        Paragraph("<br/><b>Experience</b>", styles["Heading2"])
-    )
-
-    story.append(
-        Paragraph(resume.experience or "-", styles["Normal"])
-    )
-
-    story.append(
-        Paragraph("<br/><b>Certifications</b>", styles["Heading2"])
-    )
-
-    story.append(
-        Paragraph(resume.certifications or "-", styles["Normal"])
-    )
-
-    story.append(
-        Paragraph("<br/><b>Languages</b>", styles["Heading2"])
-    )
-
-    story.append(
-        Paragraph(resume.languages or "-", styles["Normal"])
-    )
-
-    story.append(
-        Paragraph("<br/><b>GitHub</b>", styles["Heading2"])
-    )
-
-    story.append(
-        Paragraph(resume.github or "-", styles["Normal"])
-    )
-
-    story.append(
-        Paragraph("<br/><b>LinkedIn</b>", styles["Heading2"])
-    )
-
-    story.append(
-        Paragraph(resume.linkedin or "-", styles["Normal"])
+        Paragraph(
+            "<font color='#1565C0'><b>Generated by Career Coach AI</b></font>",
+            normal_style
+        )
     )
 
     doc.build(story)
@@ -647,7 +658,6 @@ def download_resume():
         download_name="Professional_Resume.pdf",
         mimetype="application/pdf"
     )
-
 @app.route("/resume/scan")
 def resume_scan():
 

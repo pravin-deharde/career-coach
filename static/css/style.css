@@ -843,3 +843,133 @@ hr{
 }
 
 }
+select {
+    width: 100%;
+    padding: 12px;
+    background: #1b1f3a;
+    color: #ffffff;
+    border: 2px solid #00e5ff;
+    border-radius: 10px;
+    font-size: 16px;
+    outline: none;
+}
+
+select:focus {
+    border-color: #00ffff;
+    box-shadow: 0 0 10px #00e5ff;
+}
+
+option {
+    background: #1b1f3a;
+    color: #ffffff;
+}
+/* ==============================
+PROFESSIONAL RESUME PREVIEW
+==============================*/
+
+.resume-preview{
+    display:flex;
+    background:#ffffff;
+    color:#222;
+    border-radius:18px;
+    overflow:hidden;
+    margin-top:40px;
+    box-shadow:0 15px 40px rgba(0,0,0,.45);
+}
+
+.resume-left{
+    width:30%;
+    background:#f4f4f4;
+    padding:30px;
+}
+
+.resume-photo{
+    width:170px;
+    height:170px;
+    border-radius:50%;
+    object-fit:cover;
+    display:block;
+    margin:auto;
+    border:5px solid #5b224c;
+}
+
+.resume-left h3{
+    color:#5b224c;
+    margin-top:35px;
+    margin-bottom:15px;
+    border-bottom:2px solid #5b224c;
+    padding-bottom:8px;
+    font-size:22px;
+    font-weight:700;
+}
+
+.resume-left p{
+    color:#333;
+    line-height:1.8;
+    font-size:15px;
+    word-break:break-word;
+}
+
+.resume-right{
+    width:70%;
+    padding:35px;
+}
+
+.resume-header{
+    background:#5b224c;
+    color:white;
+    padding:35px;
+    margin:-35px -35px 35px -35px;
+}
+
+.resume-header h1{
+    font-size:48px;
+    font-weight:800;
+}
+
+.resume-header h4{
+    margin-top:10px;
+    letter-spacing:2px;
+    color:#eee;
+}
+
+.resume-right h2{
+    color:#5b224c;
+    margin-top:28px;
+    margin-bottom:12px;
+    border-bottom:2px solid #5b224c;
+    padding-bottom:8px;
+    font-size:24px;
+}
+
+.resume-right p{
+    color:#333;
+    font-size:16px;
+    line-height:1.8;
+    white-space:pre-line;
+}
+
+@media(max-width:900px){
+
+.resume-preview{
+display:block;
+}
+
+.resume-left{
+width:100%;
+}
+
+.resume-right{
+width:100%;
+}
+
+.resume-header{
+margin:-35px;
+margin-bottom:30px;
+}
+
+.resume-header h1{
+font-size:34px;
+}
+
+}

@@ -390,84 +390,75 @@ class="btn btn-warning btn-lg">
 
 </div>
 
-<div class="container mt-5">
+<hr class="my-5">
 
-<div class="feature-card p-5">
-
-<h2 class="text-center text-info">
-
-👀 Resume Preview
-
+<h2 class="text-center hero-title">
+📄 Professional Resume Preview
 </h2>
 
-<hr>
+<div class="resume-preview">
 
-{% if resume %}
+    <div class="resume-left">
 
-<h3>{{ resume.name }}</h3>
+        {% if resume and resume.photo %}
+        <img
+        src="{{ url_for('static', filename='uploads/' + resume.photo) }}"
+        class="resume-photo">
+        {% endif %}
 
-<p>
+        <h3>CONTACT</h3>
 
-📧 {{ resume.email }}
+        <p>📞 {{ resume.phone if resume else "" }}</p>
 
-|
+        <p>📧 {{ resume.email if resume else "" }}</p>
 
-📱 {{ resume.phone }}
+        <p>💻 {{ resume.github if resume else "" }}</p>
 
-</p>
+        <p>💼 {{ resume.linkedin if resume else "" }}</p>
 
-<hr>
+        <h3>SKILLS</h3>
 
-<h4>Professional Summary</h4>
+        <p>{{ resume.skills if resume else "" }}</p>
 
-<p>{{ resume.summary }}</p>
+        <h3>LANGUAGES</h3>
 
-<h4>Education</h4>
+        <p>{{ resume.languages if resume else "" }}</p>
 
-<p>{{ resume.education }}</p>
+    </div>
 
-<h4>Skills</h4>
+    <div class="resume-right">
 
-<p>{{ resume.skills }}</p>
+        <div class="resume-header">
 
-<h4>Projects</h4>
+            <h1>{{ resume.name if resume else "Your Name" }}</h1>
 
-<p>{{ resume.projects }}</p>
+            <h4>BSC COMPUTER SCIENCE STUDENT</h4>
 
-<h4>Experience</h4>
+        </div>
 
-<p>{{ resume.experience }}</p>
+        <h2>PROFILE</h2>
 
-<h4>Certifications</h4>
+        <p>{{ resume.summary if resume else "" }}</p>
 
-<p>{{ resume.certifications }}</p>
+        <h2>EDUCATION</h2>
 
-<h4>Languages</h4>
+        <p>{{ resume.education if resume else "" }}</p>
 
-<p>{{ resume.languages }}</p>
+        <h2>PROJECTS</h2>
 
-<h4>GitHub</h4>
+        <p>{{ resume.projects if resume else "" }}</p>
 
-<p>{{ resume.github }}</p>
+        <h2>EXPERIENCE</h2>
 
-<h4>LinkedIn</h4>
+        <p>{{ resume.experience if resume else "" }}</p>
 
-<p>{{ resume.linkedin }}</p>
+        <h2>CERTIFICATIONS</h2>
 
-{% else %}
+        <p>{{ resume.certifications if resume else "" }}</p>
 
-<div class="alert alert-info text-center">
-
-Resume Preview will appear here after saving.
-
-</div>
-
-{% endif %}
+    </div>
 
 </div>
 
-</div>
-
-</div>
 
 {% endblock %}

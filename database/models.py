@@ -18,7 +18,12 @@ class User(db.Model):
 
     created_at = db.Column(db.DateTime, server_default=db.func.now())
 
-
+    chat_sessions = db.relationship(
+    "ChatSession",
+    backref="user",
+    lazy=True,
+    cascade="all, delete"
+)
 class Job(db.Model):
 
     __tablename__ = "jobs"
@@ -110,4 +115,41 @@ class JobApplication(db.Model):
     applied_at = db.Column(
         db.DateTime,
         server_default=db.func.now()
+    )
+
+from datetime import datetime
+
+class ChatSession(db.Model):
+    __tablename__ = "chat_sessions"
+
+    id = db.Column(db.Integer, primary_key=True)
+    user_id = db.Column(db.Integer, db.ForeignKey("users.id"))
+    title = db.Column(db.String(200), default="New Chat")
+    created_at = db.Column(db.DateTime, default=datetime.utcnow)
+
+    messages = db.relationship(
+        "ChatMessage",
+        backref="session",
+        lazy=True,
+        cascade="all, delete"
+    )
+
+
+class ChatMessage(db.Model):
+    __tablename__ = "chat_messages"
+
+    id = db.Column(db.Integer, primary_key=True)
+
+    session_id = db.Column(
+        db.Integer,
+        db.ForeignKey("chat_sessions.id")
+    )
+
+    sender = db.Column(db.String(20))
+
+    message = db.Column(db.Text)
+
+    created_at = db.Column(
+        db.DateTime,
+        default=datetime.utcnow
     )
