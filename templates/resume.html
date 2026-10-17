@@ -3,462 +3,331 @@
 {% block title %}Professional Resume Builder{% endblock %}
 
 {% block content %}
-
 <div class="container py-5">
 
-<div class="text-center mb-5">
-
-<h1 class="hero-title">
-
-Resume <span>Builder 2.0</span>
-
-</h1>
-
-<p class="hero-subtitle">
-
-Create an ATS Friendly Professional Resume
-
-</p>
-
-</div>
-
-<div class="feature-card p-5">
-
-<form method="POST"
-
-enctype="multipart/form-data">
-
-<div class="row">
-
-<div class="col-md-6 mb-4">
-
-<label class="form-label">
-
-👤 Full Name
-
-</label>
-
-<input
-
-type="text"
-
-name="name"
-
-class="form-control"
-
-value="{{ resume.name if resume else '' }}"
-
-required>
-
-</div>
-
-<div class="col-md-6 mb-4">
-
-<label class="form-label">
-
-📧 Email
-
-</label>
-
-<input
-
-type="email"
-
-name="email"
-
-class="form-control"
-
-value="{{ resume.email if resume else '' }}"
-
-required>
-
-</div>
-
-<div class="col-md-6 mb-4">
-
-<label class="form-label">
-
-📱 Mobile Number
-
-</label>
-
-<input
-
-type="text"
-
-name="phone"
-
-class="form-control"
-
-value="{{ resume.phone if resume else '' }}">
-
-</div>
-
-<div class="col-md-6 mb-4">
-
-<label class="form-label">
-
-🎨 Resume Template
-
-</label>
-
-<select
-
-name="template"
-
-class="form-select">
-
-<option value="modern">
-
-Modern Blue
-
-</option>
-
-<option value="professional">
-
-Professional Dark
-
-</option>
-
-<option value="creative">
-
-Creative Glass
-
-</option>
-
-<option value="minimal">
-
-Minimal White
-
-</option>
-
-<option value="executive">
-
-Executive Gold
-
-</option>
-
-</select>
-
-</div>
-
-<div class="col-12 mb-4">
-
-<label class="form-label">
-
-📝 Professional Summary
-
-</label>
-
-<textarea
-
-name="summary"
-
-rows="5"
-
-class="form-control">{{ resume.summary if resume else '' }}</textarea>
-
-</div>
-
-<div class="col-md-6 mb-4">
-
-<label class="form-label">
-
-🎓 Education
-
-</label>
-
-<textarea
-
-name="education"
-
-rows="5"
-
-class="form-control">{{ resume.education if resume else '' }}</textarea>
-
-</div>
-
-<div class="col-md-6 mb-4">
-
-<label class="form-label">
-
-🛠 Skills
-
-</label>
-
-<textarea
-
-name="skills"
-
-rows="5"
-
-class="form-control">{{ resume.skills if resume else '' }}</textarea>
-
-</div>
-<div class="col-md-6 mb-4">
-
-<label class="form-label">
-
-💼 Experience
-
-</label>
-
-<textarea
-
-name="experience"
-
-rows="5"
-
-class="form-control">{{ resume.experience if resume else '' }}</textarea>
-
-</div>
-
-<div class="col-md-6 mb-4">
-
-<label class="form-label">
-
-🚀 Projects
-
-</label>
-
-<textarea
-
-name="projects"
-
-rows="5"
-
-class="form-control">{{ resume.projects if resume else '' }}</textarea>
-
-</div>
-
-<div class="col-md-6 mb-4">
-
-<label class="form-label">
-
-🏆 Certifications
-
-</label>
-
-<textarea
-
-name="certifications"
-
-rows="5"
-
-class="form-control">{{ resume.certifications if resume else '' }}</textarea>
-
-</div>
-
-<div class="col-md-6 mb-4">
-
-<label class="form-label">
-
-🌍 Languages
-
-</label>
-
-<input
-
-type="text"
-
-name="languages"
-
-class="form-control"
-
-placeholder="English, Hindi, Marathi"
-
-value="{{ resume.languages if resume else '' }}">
-
-</div>
-
-<div class="col-md-6 mb-4">
-
-<label class="form-label">
-
-💻 GitHub Profile
-
-</label>
-
-<input
-
-type="url"
-
-name="github"
-
-class="form-control"
-
-placeholder="https://github.com/username"
-
-value="{{ resume.github if resume else '' }}">
-
-</div>
-
-<div class="col-md-6 mb-4">
-
-<label class="form-label">
-
-💼 LinkedIn Profile
-
-</label>
-
-<input
-
-type="url"
-
-name="linkedin"
-
-class="form-control"
-
-placeholder="https://linkedin.com/in/username"
-
-value="{{ resume.linkedin if resume else '' }}">
-
-</div>
-
-<div class="col-md-6 mb-4">
-
-<label class="form-label">
-
-📸 Profile Photo
-
-</label>
-
-<input
-
-type="file"
-
-name="photo"
-
-class="form-control"
-
-accept="image/*">
-
-</div>
-
-<div class="col-md-6 mb-4 text-center">
-
-{% if resume and resume.photo %}
-
-<img
-
-src="{{ url_for('static', filename='uploads/' + resume.photo) }}"
-
-class="profile-img mt-3">
-
-{% else %}
-
-<div class="feature-card p-4 mt-3">
-
-No Photo Selected
-
-</div>
-
-{% endif %}
-
-</div>
-<div class="text-center mt-5">
-
-<button
-type="submit"
-class="btn btn-glow btn-lg me-3">
-
-💾 Save Resume
-
-</button>
-
-<a
-href="/resume/download"
-class="btn btn-success btn-lg me-3">
-
-📄 Download PDF
-
+    <div class="text-center mb-5">
+        <h1 class="hero-title">
+            Resume <span>Builder 2.0</span>
+        </h1>
+
+        <p class="hero-subtitle">
+            Create Your Professional Resume
+        </p>
+    </div>
+
+    <div class="feature-card p-4 mb-5">
+
+        <form method="POST" action="{{ url_for('resume') }}">
+
+            <div class="row">
+
+                <div class="col-md-6 mb-3">
+                    <label class="form-label">Full Name</label>
+                    <input type="text"
+                           name="name"
+                           class="form-control"
+                           value="{{ resume.name if resume else '' }}"
+                           placeholder="Enter your full name"
+                           required>
+                </div>
+
+                <div class="col-md-6 mb-3">
+                    <label class="form-label">Professional Title</label>
+                    <input type="text"
+                           name="headline"
+                           class="form-control"
+                           placeholder="e.g. BSc Computer Science Student">
+                </div>
+
+                <div class="col-md-6 mb-3">
+                    <label class="form-label">Email</label>
+                    <input type="email"
+                           name="email"
+                           class="form-control"
+                           value="{{ resume.email if resume else '' }}"
+                           placeholder="you@example.com"
+                           required>
+                </div>
+
+                <div class="col-md-6 mb-3">
+                    <label class="form-label">Mobile Number</label>
+                    <input type="tel"
+                           name="phone"
+                           class="form-control"
+                           value="{{ resume.phone if resume else '' }}"
+                           placeholder="Enter your phone number">
+                </div>
+
+                <div class="col-12 mb-3">
+                    <label class="form-label">Professional Summary</label>
+                    <textarea name="summary"
+                              class="form-control"
+                              rows="4"
+                              placeholder="Briefly describe your background, skills and career goals">{{ resume.summary if resume else '' }}</textarea>
+                </div>
+
+                <div class="col-md-6 mb-3">
+                    <label class="form-label">Education</label>
+                    <textarea name="education"
+                              class="form-control"
+                              rows="4"
+                              placeholder="Degree, college, passing year, grade">{{ resume.education if resume else '' }}</textarea>
+                </div>
+
+                <div class="col-md-6 mb-3">
+                    <label class="form-label">Skills</label>
+                    <textarea name="skills"
+                              class="form-control"
+                              rows="4"
+                              placeholder="Python, Java, SQL, HTML, CSS">{{ resume.skills if resume else '' }}</textarea>
+                </div>
+
+                <div class="col-md-6 mb-3">
+                    <label class="form-label">Work Experience</label>
+                    <textarea name="experience"
+                              class="form-control"
+                              rows="4"
+                              placeholder="Job title, company, duration and responsibilities. Leave blank if fresher.">{{ resume.experience if resume else '' }}</textarea>
+                </div>
+
+                <div class="col-md-6 mb-3">
+                    <label class="form-label">Projects</label>
+                    <textarea name="projects"
+                              class="form-control"
+                              rows="4"
+                              placeholder="Project name, technologies and what you built">{{ resume.projects if resume else '' }}</textarea>
+                </div>
+
+                <div class="col-md-6 mb-3">
+                    <label class="form-label">Certifications</label>
+                    <textarea name="certifications"
+                              class="form-control"
+                              rows="3"
+                              placeholder="Certification name and issuing organisation">{{ resume.certifications if resume else '' }}</textarea>
+                </div>
+
+                <div class="col-md-6 mb-3">
+                    <label class="form-label">Languages</label>
+                    <input type="text"
+                           name="languages"
+                           class="form-control"
+                           value="{{ resume.languages if resume else '' }}"
+                           placeholder="English, Hindi, Marathi">
+                </div>
+
+                <div class="col-md-6 mb-3">
+                    <label class="form-label">GitHub Profile</label>
+                    <input type="url"
+                           name="github"
+                           class="form-control"
+                           value="{{ resume.github if resume else '' }}"
+                           placeholder="https://github.com/username">
+                </div>
+
+                <div class="col-md-6 mb-3">
+                    <label class="form-label">LinkedIn Profile</label>
+                    <input type="url"
+                           name="linkedin"
+                           class="form-control"
+                           value="{{ resume.linkedin if resume else '' }}"
+                           placeholder="https://linkedin.com/in/username">
+                </div>
+
+            </div>
+
+            <div class="text-center mt-4">
+
+                <button type="submit"
+                        class="btn btn-primary btn-lg">
+                    Save Resume & Update Preview
+                </button>
+
+               <a href="/resume/download"
+   class="btn btn-success btn-lg">
+    Download PDF
 </a>
 
-<a
-href="/resume/scan"
-class="btn btn-warning btn-lg">
+            </div>
 
-🤖 ATS Resume Scan
-
-</a>
-
-</div>
-
-</div>
-
-</form>
-
-</div>
-
-<hr class="my-5">
-
-<h2 class="text-center hero-title">
-📄 Professional Resume Preview
-</h2>
-
-<div class="resume-preview">
-
-    <div class="resume-left">
-
-        {% if resume and resume.photo %}
-        <img
-        src="{{ url_for('static', filename='uploads/' + resume.photo) }}"
-        class="resume-photo">
-        {% endif %}
-
-        <h3>CONTACT</h3>
-
-        <p>📞 {{ resume.phone if resume else "" }}</p>
-
-        <p>📧 {{ resume.email if resume else "" }}</p>
-
-        <p>💻 {{ resume.github if resume else "" }}</p>
-
-        <p>💼 {{ resume.linkedin if resume else "" }}</p>
-
-        <h3>SKILLS</h3>
-
-        <p>{{ resume.skills if resume else "" }}</p>
-
-        <h3>LANGUAGES</h3>
-
-        <p>{{ resume.languages if resume else "" }}</p>
+        </form>
 
     </div>
 
-    <div class="resume-right">
+<hr class="my-5">
+<h2 class="text-center hero-title mb-4">
+    Professional Resume Preview
+</h2>
 
-        <div class="resume-header">
+<div class="professional-resume">
 
-            <h1>{{ resume.name if resume else "Your Name" }}</h1>
+    <!-- HEADER -->
+    <header class="pr-header">
 
-            <h4>BSC COMPUTER SCIENCE STUDENT</h4>
+        <h1>
+            {{ resume.name if resume and resume.name else "YOUR NAME" }}
+        </h1>
+
+        <h2>
+            {{ resume.headline if resume and resume.headline else "Professional Candidate" }}
+        </h2>
+
+        <div class="pr-contact">
+
+            {% if resume and resume.phone %}
+                <span>{{ resume.phone }}</span>
+            {% endif %}
+
+            {% if resume and resume.email %}
+                <span>{{ resume.email }}</span>
+            {% endif %}
+
+            {% if resume and resume.linkedin %}
+                <span>{{ resume.linkedin }}</span>
+            {% endif %}
+
+            {% if resume and resume.github %}
+                <span>{{ resume.github }}</span>
+            {% endif %}
 
         </div>
 
-        <h2>PROFILE</h2>
+    </header>
 
-        <p>{{ resume.summary if resume else "" }}</p>
+    <!-- SUMMARY -->
+    {% if resume and resume.summary %}
 
-        <h2>EDUCATION</h2>
+    <section class="pr-section">
 
-        <p>{{ resume.education if resume else "" }}</p>
+        <h3>PROFESSIONAL SUMMARY</h3>
 
-        <h2>PROJECTS</h2>
+        <p>{{ resume.summary }}</p>
 
-        <p>{{ resume.projects if resume else "" }}</p>
+    </section>
 
-        <h2>EXPERIENCE</h2>
+    {% endif %}
 
-        <p>{{ resume.experience if resume else "" }}</p>
+    <!-- EDUCATION -->
+    {% if resume and resume.education %}
 
-        <h2>CERTIFICATIONS</h2>
+    <section class="pr-section">
 
-        <p>{{ resume.certifications if resume else "" }}</p>
+        <h3>EDUCATION</h3>
 
-    </div>
+        {% for item in resume.education.splitlines() %}
+
+            {% if item.strip() %}
+
+                <p class="pr-entry">{{ item }}</p>
+
+            {% endif %}
+
+        {% endfor %}
+
+    </section>
+
+    {% endif %}
+
+    <!-- EXPERIENCE -->
+    {% if resume and resume.experience %}
+
+    <section class="pr-section">
+
+        <h3>WORK EXPERIENCE</h3>
+
+        {% for item in resume.experience.splitlines() %}
+
+            {% if item.strip() %}
+
+                <p class="pr-entry">{{ item }}</p>
+
+            {% endif %}
+
+        {% endfor %}
+
+    </section>
+
+    {% endif %}
+
+    <!-- PROJECTS -->
+    {% if resume and resume.projects %}
+
+    <section class="pr-section">
+
+        <h3>PROJECTS</h3>
+
+        {% for item in resume.projects.splitlines() %}
+
+            {% if item.strip() %}
+
+                <p class="pr-entry">{{ item }}</p>
+
+            {% endif %}
+
+        {% endfor %}
+
+    </section>
+
+    {% endif %}
+
+    <!-- SKILLS -->
+    {% if resume and resume.skills %}
+
+    <section class="pr-section">
+
+        <h3>SKILLS</h3>
+
+        <ul class="pr-skills">
+
+            {% for skill in resume.skills.replace(',', '\n').splitlines() %}
+
+                {% if skill.strip() %}
+
+                    <li>{{ skill.strip() }}</li>
+
+                {% endif %}
+
+            {% endfor %}
+
+        </ul>
+
+    </section>
+
+    {% endif %}
+
+    <!-- CERTIFICATIONS -->
+    {% if resume and resume.certifications %}
+
+    <section class="pr-section">
+
+        <h3>CERTIFICATIONS</h3>
+
+        {% for item in resume.certifications.splitlines() %}
+
+            {% if item.strip() %}
+
+                <p class="pr-entry">{{ item }}</p>
+
+            {% endif %}
+
+        {% endfor %}
+
+    </section>
+
+    {% endif %}
+
+    <!-- LANGUAGES -->
+    {% if resume and resume.languages %}
+
+    <section class="pr-section">
+
+        <h3>LANGUAGES</h3>
+
+        <p>{{ resume.languages }}</p>
+
+    </section>
+
+    {% endif %}
 
 </div>
-
 
 {% endblock %}

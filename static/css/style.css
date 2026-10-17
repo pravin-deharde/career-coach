@@ -973,3 +973,143 @@ font-size:34px;
 }
 
 }
+/* Professional Resume Preview */
+
+.professional-resume {
+    width: 100%;
+    max-width: 850px;
+    margin: 30px auto;
+    padding: 48px 55px;
+    background: #ffffff;
+    color: #292929;
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 14px;
+    line-height: 1.6;
+    text-align: left;
+    box-shadow: 0 4px 22px rgba(0, 0, 0, 0.15);
+    border: 1px solid #dddddd;
+}
+
+.pr-header {
+    text-align: center;
+    border-bottom: 2px solid #555555;
+    padding-bottom: 18px;
+    margin-bottom: 22px;
+}
+
+.pr-header h1 {
+    font-size: 32px;
+    font-weight: 800;
+    color: #242424;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    margin: 0 0 6px;
+    overflow-wrap: anywhere;
+}
+
+.pr-header h2 {
+    font-size: 19px;
+    font-weight: 400;
+    color: #444444;
+    margin: 0 0 14px;
+    overflow-wrap: anywhere;
+}
+
+.pr-contact {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 8px 20px;
+    font-size: 12px;
+    color: #555555;
+    overflow-wrap: anywhere;
+}
+
+.pr-contact span {
+    overflow-wrap: anywhere;
+    word-break: break-word;
+}
+
+.pr-section {
+    margin-bottom: 23px;
+    break-inside: auto;
+}
+
+.pr-section h3 {
+    font-size: 17px;
+    font-weight: 800;
+    letter-spacing: 1.3px;
+    color: #292929;
+    border-bottom: 1px solid #777777;
+    padding-bottom: 7px;
+    margin: 0 0 12px;
+}
+
+.pr-section p {
+    margin: 0 0 9px;
+    color: #333333;
+    overflow-wrap: anywhere;
+    white-space: pre-line;
+}
+
+.pr-entry {
+    padding-left: 2px;
+}
+
+.pr-skills {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 5px 24px;
+    padding-left: 20px;
+    margin-bottom: 0;
+}
+
+.pr-skills li {
+    padding-left: 2px;
+    overflow-wrap: anywhere;
+    break-inside: avoid;
+}
+
+@media (max-width: 600px) {
+    .professional-resume {
+        padding: 25px 20px;
+        font-size: 12px;
+    }
+
+    .pr-header h1 {
+        font-size: 24px;
+    }
+
+    .pr-header h2 {
+        font-size: 16px;
+    }
+
+    .pr-skills {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+}
+
+@media print {
+    .professional-resume {
+        width: 100%;
+        max-width: none;
+        margin: 0;
+        padding: 15mm;
+        border: none;
+        box-shadow: none;
+        font-size: 10pt;
+    }
+
+    .pr-header,
+    .pr-section h3 {
+        break-after: avoid;
+    }
+
+    .pr-section {
+        break-inside: auto;
+    }
+
+    .pr-contact {
+        color: #333333;
+    }
+}

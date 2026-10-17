@@ -95,25 +95,63 @@
             </button>
 
         </form>
+{% if recommendations %}
 
-        {% if career %}
+<hr class="my-4">
 
-        <hr>
+<div class="alert alert-info">
+    <h4>Career Guidance for {{ student_name }}</h4>
+    <p>
+        These options are based on your selected interest.
+        Compare the skills and learning paths before making a decision.
+    </p>
+</div>
 
-        <div class="alert alert-success mt-4">
+<div class="row g-3">
 
-            <h3>🎯 Recommended Career</h3>
+    {% for item in recommendations %}
 
-            <h4>{{ career }}</h4>
+    <div class="col-md-4">
 
-            <p>{{ reason }}</p>
+        <div class="card h-100 shadow-sm">
+
+            <div class="card-body">
+
+                <span class="badge bg-primary mb-2">
+                    Option {{ loop.index }}
+                </span>
+
+                <h4>{{ item.title }}</h4>
+
+                <p>{{ item.reason }}</p>
+
+                <h6>Skills to learn</h6>
+
+                {% for skill in item.skills %}
+                    <span class="badge bg-secondary mb-1">
+                        {{ skill }}
+                    </span>
+                {% endfor %}
+
+                <hr>
+
+                <h6>Suggested learning roadmap</h6>
+
+                <ol>
+                    {% for step in item.roadmap %}
+                        <li class="mb-2">{{ step }}</li>
+                    {% endfor %}
+                </ol>
+
+            </div>
 
         </div>
 
-        {% endif %}
-
     </div>
+
+    {% endfor %}
 
 </div>
 
+{% endif %}
 {% endblock %}
